@@ -178,7 +178,7 @@ If TutorGuide AI is used in a school or institutional setting, you (the tutor) a
 Your data is retained until you delete it. You may delete any session, student record, or your entire account at any time from within the app. Deleted data is permanently removed and cannot be recovered.
 
 8. CONTACT
-Questions or concerns about your data? Contact us at hello@tutorguideai.com.
+Questions or concerns about your data? Contact us at tutorguideai@gmail.com.
 
 By creating an account, you agree to these terms.`;
 

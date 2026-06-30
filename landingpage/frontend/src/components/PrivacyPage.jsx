@@ -45,7 +45,7 @@ export default function PrivacyPage() {
           },
           {
             title: "8. Contact",
-            body: "If you have questions or concerns about your data, contact us at hello@tutorguideai.com."
+            body: "If you have questions or concerns about your data, contact us at tutorguideai@gmail.com."
           },
         ].map(({ title, body }) => (
           <div key={title} className="mb-8">

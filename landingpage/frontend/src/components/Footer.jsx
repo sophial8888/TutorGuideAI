@@ -66,14 +66,14 @@ export default function Footer() {
             Questions? Feedback? We'd love to hear from you.
           </p>
           <a
-            href="mailto:hello@tutorguideai.com"
+            href="mailto:tutorguideai@gmail.com"
             className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors duration-200 mb-5"
           >
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
               <polyline points="22,6 12,13 2,6"/>
             </svg>
-            hello@tutorguideai.com
+            tutorguideai@gmail.com
           </a>
           <a
             href="#signup"
