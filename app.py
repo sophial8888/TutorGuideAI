@@ -1,6 +1,6 @@
 import os
 from flask import Flask, request, jsonify
-from google import genai
+from groq import Groq
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -14,36 +14,183 @@ def add_cors_headers(response):
     response.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
     return response
 
-@app.route("/chat", methods=["POST", "OPTIONS"])
-def chat():
-    if request.method == "OPTIONS":
-        return jsonify({}), 200
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+MODEL = "llama-3.3-70b-versatile"
 
-    client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
-    data = request.get_json()
-    messages = data.get("messages", [])
-    transcript = data.get("transcript", "").strip()
+SYSTEM_PROMPT = """You are TutorGuide AI, a real-time instructional coaching assistant for peer math tutors during live tutoring sessions.
 
-    # --- Context from the left rail ---
-    # These are sent from the frontend whenever the tutor
-    # selects a subject, topic, session plan, or feeling pills
-    subject = data.get("subject", "")
-    topic = data.get("topic", "")
-    session_plan = data.get("sessionPlan", "")
-    feelings = data.get("feelings", [])  # list of active feelings
+You do NOT teach students directly. You coach the tutor.
 
-    # --- Base system prompt ---
-    system = """You are TutorGuide AI, a real-time instructional coach for a peer math tutor during a live tutoring session.
+The tutor is a strong math student but a novice teacher.
 
-IMPORTANT: You are coaching the TUTOR, not the student. The tutor is a high school or college student with strong math knowledge but limited teaching experience. They are sitting beside their student and will read your advice, then teach the student themselves. Never address the student directly.
+Your purpose is to improve the tutor’s teaching decisions in real time.
 
-Your job:
-- Help the tutor teach effectively: suggest questions to ask, clearer ways to explain a concept, how to spot and fix misconceptions, and what to do next.
-- Favor guiding the student to discover answers (Socratic approach) over handing over final answers. When the tutor needs the full worked solution for their own reference, give it clearly.
-- Be concise and practical. The tutor is mid-session and needs to glance and act.
-- Use plain, encouraging language."""
+========================
+CORE IDENTITY RULES
+========================
+- You are an instructional coach, not a math solver.
+- You coach the tutor only, never the student.
+- You help the tutor decide:
+  - what to ask
+  - what to say
+  - how to explain a concept
+  - what misconception may be occurring
+  - what next teaching move to take
+- Never address the student directly.
+- Never give generic advice.
+- Never use vague tutoring phrases like “ask guiding questions” or “check understanding.”
+- Prefer Socratic tutoring strategies.
+- Assume tutor understands math unless explicitly unclear.
 
-    # --- Inject subject + topic context if selected ---
+========================
+GLOBAL OUTPUT RULES
+========================
+- Max 5–8 bullet points per response.
+- Responses must be glanceable and actionable.
+- Every bullet must be specific to the situation.
+- Include exact tutor wording when possible.
+- No long explanations or lectures.
+- No educational jargon unless necessary.
+- Prioritize “what the tutor should do next.”
+
+========================
+GLOBAL COACHING LOGIC
+========================
+For every request:
+1. Identify concept (internally)
+2. Predict likely student misunderstanding(s)
+3. Decide instructional move
+4. Generate tutor-facing actions
+5. Prioritize smallest effective intervention
+6. If unclear, ask for clarification instead of guessing
+
+========================
+HARD RESTRICTION
+========================
+Full worked solutions are ONLY allowed in:
+- Practice Problem mode
+- Explicit request in Chat mode
+
+Otherwise:
+- Always scaffold, never solve.
+
+========================
+MODES
+========================
+
+------------------------
+1. HINT MODE
+------------------------
+Goal: Give a small nudge without revealing the answer.
+
+Output structure:
+- Likely misunderstanding (if relevant)
+- Best hint to give
+- Exact tutor question to ask
+- Optional second hint if stuck
+
+Rules:
+- Never solve
+- Never give full steps
+
+------------------------
+2. CONCEPT EXPLANATION MODE
+------------------------
+Goal: Help the tutor explain a concept clearly and effectively.
+
+Output structure:
+- Core idea in simple terms (for tutor understanding)
+- 2–3 ways the tutor can explain it (e.g., visual, analogy, step-based)
+- Common student confusion to watch for
+- Exact wording the tutor can use
+- Quick check-for-understanding question
+
+Rules:
+- Focus on clarity and teaching strategies
+- Do NOT default to full formal derivations unless necessary
+- Include misconception awareness only as support
+
+------------------------
+3. PRACTICE PROBLEM MODE
+------------------------
+Goal: Generate reinforcement practice.
+
+Output structure:
+- 1–2 practice problems
+- FULL worked solution (allowed ONLY here)
+- Common mistake to watch for
+- Variation problem
+
+Rules:
+- Must align with likely misunderstanding if known
+
+------------------------
+4. NEXT STEP MODE
+------------------------
+Goal: Give immediate instructional action.
+
+Output structure:
+- Immediate next action (1 line)
+- Why this matters
+- Exact tutor script
+- If student does X → do Y
+- If stuck → fallback move
+
+Rules:
+- Extremely action-focused
+- No theory dumps
+
+------------------------
+5. CHAT MODE
+------------------------
+Goal: Flexible tutoring support.
+
+Allowed:
+- Concept explanations
+- Strategy guidance
+- Clarification
+- Full solutions ONLY if requested
+
+Still:
+- Must remain concise
+- Must stay tutor-facing
+
+========================
+PEDAGOGICAL PRIORITIES
+========================
+- Socratic questioning over explanation
+- Misconception awareness embedded in explanation
+- Tutor action > theory
+- Minimal effective intervention
+- Concrete scripts over abstract advice
+- Multiple representations only if helpful
+
+========================
+VISUAL TAG RULE
+========================
+Only use when it clearly helps.
+
+Format:
+VISUAL:{\"type\":\"graph\",\"expressions\":[\"y=2*x+1\"],\"title\":\"Graph title here\"}
+
+Rules:
+- Only one per response
+- Must be at end
+- Only if it improves instruction
+
+========================
+AVOID
+========================
+- Generic tutoring advice
+- Talking to student
+- Overly long explanations
+- Repeated suggestions
+- Full solutions outside Practice mode"""
+
+
+def build_system_prompt(subject, topic, session_plan, feelings):
+    system = SYSTEM_PROMPT
+
     if subject or topic:
         system += "\n\n--- SESSION CONTEXT ---"
         if subject:
@@ -54,104 +201,106 @@ Your job:
             system += f"\nSession plan:\n{session_plan}"
         system += "\nUse this context to make your coaching specific to what the tutor is currently teaching."
 
-    # --- Inject feeling context if any pills are active ---
-    # Each feeling shifts the AI's tone and coaching approach
     if feelings:
         feeling_str = ", ".join(feelings)
-        system += f"\n\n--- STUDENT STATE ---\nThe tutor has indicated the student is currently feeling: {feeling_str}."
+        system += f"\n\n--- STUDENT STATE ---\nThe student is currently feeling: {feeling_str}."
 
-        # Add specific instructions for each active feeling
         feeling_instructions = {
-            "Engaged": "The student is engaged and following along. You can suggest pushing slightly further or introducing a connected concept.",
-            "Confused": "The student is confused. Simplify your language, slow down, use more analogies and concrete examples. Suggest the tutor check for understanding before moving on.",
-            "Frustrated": "The student is frustrated. Prioritize encouragement strategies. Suggest breaking the problem into smaller steps and celebrating small wins. Avoid overwhelming them with too much at once.",
-            "Disengaged": "The student is disengaged. Suggest ways to re-connect them — real-world examples, asking their opinion, or switching to a more interactive approach.",
-            "Breakthrough": "The student just had a breakthrough moment. Suggest the tutor capitalize on this momentum — ask a slightly harder follow-up, connect to the bigger picture, or let the student explain it back.",
+            "Engaged": "The student is engaged. You can suggest pushing slightly further or introducing a connected concept.",
+            "Confused": "The student is confused. Simplify your language, use more analogies and concrete examples.",
+            "Frustrated": "The student is frustrated. Prioritize encouragement and breaking things into smaller steps.",
+            "Disengaged": "The student is disengaged. Suggest re-engagement strategies like real-world examples.",
+            "Breakthrough": "The student just had a breakthrough. Suggest capitalizing on this momentum.",
         }
 
         for feeling in feelings:
             if feeling in feeling_instructions:
                 system += f"\n- {feeling_instructions[feeling]}"
 
-    # --- Inject transcript if available ---
-    if transcript:
-        system += f"\n\n--- LIVE TRANSCRIPT ---\n{transcript}"
+    return system
 
-    # --- Visual generation instructions ---
-    system += """
 
-GENERATING MATH VISUALS:
-When a visual would genuinely help the tutor explain a concept, include a special tag in your response.
-Use this exact format on its own line:
-VISUAL:{"type":"graph","expressions":["y=2*x+1"],"title":"Graph title here"}
-
-Rules for visuals:
-- Only include a VISUAL tag when it genuinely adds value
-- Use Desmos expression syntax: * for multiply, ^ for exponent, sqrt(x) for square root
-- Put the VISUAL tag at the END of your text response, on its own line
-- Never include more than one VISUAL tag per response
-- Do NOT include a VISUAL tag for every response"""
-
-    # --- Build conversation history ---
-    conversation = system + "\n\n"
-    for m in messages[:-1]:
-        role = "Tutor" if m["role"] == "user" else "Coach"
-        conversation += f"{role}: {m['content']}\n\n"
-
-    latest = messages[-1]["content"] if messages else ""
-    conversation += f"Tutor: {latest}\n\nCoach:"
-
-    try:
-        response = client.models.generate_content(
-            model="gemini-2.0-flash-lite",
-            contents=conversation,
-        )
-        return jsonify({"reply": response.text})
-    except Exception as e:
-        error_str = str(e)
-        if "429" in error_str or "RESOURCE_EXHAUSTED" in error_str:
-            return jsonify({"error": "Quota reached. Please wait a minute and try again."}), 429
-        return jsonify({"error": error_str}), 500
-
-@app.route("/generate-plan", methods=["POST", "OPTIONS"])
-def generate_plan():
-    """
-    Separate endpoint just for generating session plans.
-    Called when the tutor clicks 'Generate Plan' in the left rail.
-    """
+@app.route("/chat", methods=["POST", "OPTIONS"])
+def chat():
     if request.method == "OPTIONS":
         return jsonify({}), 200
 
-    client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+    data = request.get_json()
+    messages = data.get("messages", [])
+    subject = data.get("subject", "")
+    topic = data.get("topic", "")
+    session_plan = data.get("sessionPlan", "")
+    feelings = data.get("feelings", [])
+    transcript = data.get("transcript", "").strip()
+
+    system = build_system_prompt(subject, topic, session_plan, feelings)
+
+    if transcript:
+        system += f"\n\n--- LIVE TRANSCRIPT ---\n{transcript}"
+
+    groq_messages = [{"role": "system", "content": system}]
+    for m in messages:
+        groq_messages.append({
+            "role": m["role"],
+            "content": m["content"]
+        })
+
+    try:
+        response = client.chat.completions.create(
+            model=MODEL,
+            messages=groq_messages,
+            max_tokens=1024,
+            temperature=0.7,
+        )
+        reply = response.choices[0].message.content
+        return jsonify({"reply": reply})
+    except Exception as e:
+        error_str = str(e)
+        if "429" in error_str or "rate_limit" in error_str.lower():
+            return jsonify({"error": "Rate limit reached. Please wait a moment and try again."}), 429
+        return jsonify({"error": error_str}), 500
+
+
+@app.route("/generate-plan", methods=["POST", "OPTIONS"])
+def generate_plan():
+    if request.method == "OPTIONS":
+        return jsonify({}), 200
+
     data = request.get_json()
     subject = data.get("subject", "")
     topic = data.get("topic", "")
 
-    prompt = f"""You are an expert math tutoring coach. Generate a concise session plan for a peer tutor who is about to teach the following:
-
+    prompt = f"""Generate a concise session plan for a peer math tutor teaching:
 Subject: {subject}
 Topic: {topic}
 
-The session plan should:
-- Have 4-6 numbered steps
-- Be practical and specific to this topic
-- Progress from warm-up/review to practice to checking understanding
-- Be written for the tutor (not the student)
-- Be brief — each step is one short sentence
+Requirements:
+- 4-6 numbered steps
+- Practical and specific to this topic
+- Progress from warm-up to practice to checking understanding
+- Written for the tutor, not the student
+- Each step is one short sentence
 
-Format it as a numbered list only. No intro sentence, no conclusion."""
+Format as a numbered list only. No intro or conclusion."""
 
     try:
-        response = client.models.generate_content(
-            model="gemini-2.0-flash",
-            contents=prompt,
+        response = client.chat.completions.create(
+            model=MODEL,
+            messages=[
+                {"role": "system", "content": "You are an expert math tutoring coach."},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=512,
+            temperature=0.7,
         )
-        return jsonify({"plan": response.text})
+        plan = response.choices[0].message.content
+        return jsonify({"plan": plan})
     except Exception as e:
         error_str = str(e)
-        if "429" in error_str or "RESOURCE_EXHAUSTED" in error_str:
-            return jsonify({"error": "Quota reached. Please wait a minute and try again."}), 429
+        if "429" in error_str or "rate_limit" in error_str.lower():
+            return jsonify({"error": "Rate limit reached. Please wait a moment and try again."}), 429
         return jsonify({"error": error_str}), 500
+
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)

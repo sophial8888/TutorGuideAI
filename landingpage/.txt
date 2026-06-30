@@ -1,0 +1,107 @@
+Build the TutorGuide AI landing page as a React + Vite + TailwindCSS site (frontend) with a Flask API backend.
+
+Product: AI-powered math tutoring chatbot for K-12 students, designed to support peer tutors.
+Tone: "Fun but credible" — warm, energetic, and approachable while remaining trustworthy.
+
+Typography:
+- Fredoka for headings and Nunito for body text via CSS variables. Only use these two fonts.
+- Interaction behavior: Hero words "Made" (blue) and "Smarter" (pink) use cursor-default but have hover scale effects.
+
+CRITICAL FIDELITY CONSTRAINTS
+- Color Palette: Blue (#5BC0EB), Yellow (#FFD93D), Pink (#FF8FAB), Green (#6EE7B7), Dark (#2B2B2B).
+- Selection color: `selection:bg-[#5BC0EB] selection:text-white`.
+- No smooth scrolling should be added beyond the `scroll-smooth` class on the html tag.
+- The header must have a `backdrop-blur-md` and `bg-white/90` with a transition duration of 300ms.
+
+TECH STACK / DEPENDENCIES
+- Tailwind CSS (via CDN: https://cdn.tailwindcss.com)
+- Iconify Icon Component (https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js)
+- Google Fonts: Fredoka (400, 500, 600) and Nunito (400, 500, 600, 700).
+
+GLOBAL STYLE
+- Body: `font-family: 'Nunito', sans-serif; color: #2B2B2B; background-color: #FAFAFA;`.
+- Headings: `font-family: 'Fredoka', sans-serif;`.
+- Custom animations:
+  - `float`: translateY(0) to translateY(-15px) over 6s infinite.
+  - `wiggle`: rotate(-3deg) to rotate(3deg) over 0.5s infinite (triggered on hover).
+  - `bounce`: standard bounce with 3s duration.
+
+ASSET MAP
+- Hero: https://images.unsplash.com/photo-1587654780291-39c9404d746b?q=80&w=2070
+- Play Group Class: https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?q=80&w=2572
+- Nursery Class: https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=2646
+- Junior KG Class: https://images.unsplash.com/photo-1588072432836-e10032774350?q=80&w=2672
+- Gallery Item 1: https://images.unsplash.com/photo-1503919545889-aef636e10ad4?q=80&w=1974
+- Gallery Item 2: https://images.unsplash.com/photo-1544717302-de2939b7ef71?q=80&w=2670
+- Gallery Item 3: https://images.unsplash.com/photo-1587691592099-24045742c181?q=80&w=2673
+- Gallery Item 4: https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=2640
+- Gallery Item 5: https://images.unsplash.com/photo-1566004100631-35d015d6a491?q=80&w=2670
+- Teacher Sarah: https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974
+- Teacher Emily: https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976
+- Teacher Jessica: https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1976
+- Teacher Linda: https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=2670
+- Testimonial Avatars: https://randomuser.me/api/portraits/women/44.jpg, https://randomuser.me/api/portraits/men/32.jpg, https://randomuser.me/api/portraits/women/68.jpg
+
+VECTOR / ICON SHAPES
+- Use `iconify-icon` components with prefixes: `solar:`, `brandico:`.
+- Example: `solar:book-2-linear`, `solar:arrow-right-linear`, `solar:hat-graduation-linear`, `solar:star-bold`.
+
+LAYER STACK / POSITIONING MAP
+- Header: `fixed top-0`, z-index 50.
+- Hero Blobs: `absolute`, z-index -10, `blur-3xl`.
+- Hero Image Container: `relative`, z-index 10, with underlying decorative `rotate-3` and `-rotate-2` background divs.
+- Floating Hero Badge: `absolute -bottom-6 -left-4`, `animate-bounce`.
+- Section ID anchors should be used for scrolling from nav links (#about, #classes, #activities, #gallery, #contact).
+
+SECTION 1 - NAVBAR
+- Fixed, backdrop-blur-md, bg-white/90 on scroll (transparent at top).
+- Logo: Yellow icon box + "TutorGuide AI" with "AI" in brand blue.
+- Desktop links: Home, How It Works, Features, Who It's For, Testimonials.
+- CTA: Pink (#FF8FAB) "Sign Up Free" rounded-full with arrow icon. Mobile: hamburger.
+
+SECTION 2 - HERO
+- Headline: "Math Tutoring, Made Smarter" — "Made" in blue, "Smarter" in pink with hover scale.
+- Pill badge: green pulse dot + "Now available for Math tutoring".
+- Inline email signup form → POST /api/signup → redirect to chatbot URL.
+- Social proof: avatar stack + "500+ peer tutors already using TutorGuide AI".
+- Right visual: floating chat mock card (animate-float) with rotated background layers.
+- Floating bounce badge: 🧮 "Step-by-step Math explanations".
+
+SECTION 3 - HOW IT WORKS
+- Title: "How It Works". 3 cards with connector line on desktop.
+- Steps: (01) Create your account, (02) Start a tutoring session, (03) Get step-by-step AI guidance.
+- Colors: Blue, Pink, Green per card. hover:-translate-y-2.
+
+SECTION 4 - FEATURES
+- Background: Light blue (#F0F9FF).
+- 4-column grid: Step-by-Step Explanations (blue), 24/7 Availability (pink), Math-Focused AI (yellow), Built for Peer Tutors (green).
+
+SECTION 5 - WHO IT'S FOR
+- Two side-by-side audience cards: "Peer Tutors" (blue accent) + "Students" (pink accent).
+- Each has a bullet checklist + "Sign Up" CTA button.
+
+SECTION 6 - TESTIMONIALS
+- Background: gradient blue-50 to pink-50.
+- Horizontal snap-scroll, no-scrollbar. Cards min-w-[380px]. Star ratings in #FFD93D. Role badge per card.
+
+SECTION 7 - CTA / SIGNUP
+- Blue (#5BC0EB) blob card with decorative background circles.
+- Full signup form: name, email, role toggle (Peer Tutor / Student) + pink "Create Free Account" button.
+- On success: POST /api/signup → redirect to http://localhost:5173/
+
+SECTION 8 - FOOTER
+- Dark (#2B2B2B) background. 3 columns: Brand + socials, Quick Links, Contact + CTA.
+- Email: hello@tutorguideai.com. "Sign Up Free" pink button.
+
+GLOBAL ANIMATION / INTERACTION RULES
+- All hover transitions should be 300ms duration.
+- Horizontal scroll areas must use `snap-center` on child elements.
+- `no-scrollbar` utility must be used for testimonial containers.
+
+COMMON MISTAKES TO AVOID
+- Do not use standard squares; the site uses heavily rounded corners (`rounded-[2rem]` and `rounded-[3rem]`).
+- Do not miss the `rotate-3` and `-rotate-2` background layers behind the hero image.
+- Ensure the float animation is infinite and the wiggle is only on hover.
+
+IMPLEMENTATION REQUIREMENTS
+- Build exactly as described. Use the original asset URLs. Ensure responsive breakpoints (md: grid columns) match the layout descriptions.
