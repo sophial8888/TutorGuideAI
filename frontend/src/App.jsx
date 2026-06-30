@@ -152,26 +152,33 @@ Last updated: June 2026
 1. DATA WE COLLECT
 When you use TutorGuide AI, we collect and store:
 - Session metadata (date, time, duration, subject, topic)
-- Student names and profiles (optional)
+- Student names and profiles (optional, entered by you)
 - AI coaching chat logs
 - Live session speech transcripts
 - Student emotional state indicators
 - Post-session reflection reports
+- Your name and email address (used for your account)
 
 2. HOW WE USE YOUR DATA
-Your data is used solely to display your past sessions and student progress. We do not sell or share your data.
+Your data is used solely to display your past sessions and student progress within the app. We do not sell, share, or use your data for advertising or any third-party purpose.
 
 3. DATA STORAGE & SECURITY
-All data is stored with Row Level Security — only you can access your own data.
+All data is stored in Supabase with Row Level Security (RLS) enforced at the database level. This means your data is cryptographically isolated — no other user can access it, even if they are authenticated. Access controls are enforced server-side, not just in the app.
 
-4. STUDENT PRIVACY
-You are responsible for obtaining appropriate consent from students and parents/guardians before recording sessions.
+4. AUTHENTICATION
+You may sign in using email/password or Google OAuth. When you use Google Sign-In, authentication is handled by Google and subject to Google's Privacy Policy (policies.google.com/privacy). We receive only your name and email address from Google — we do not receive your Google password or any other Google account data.
 
-5. DATA RETENTION & DELETION
-Your data is retained until you delete it. You may delete any session or student record at any time.
+5. STUDENT PRIVACY
+You are responsible for obtaining appropriate consent from students and parents/guardians before entering student names or recording session transcripts. Do not enter personally identifiable information beyond what is necessary.
 
 6. FERPA NOTICE
-If used in a school setting, you are responsible for FERPA compliance.
+If TutorGuide AI is used in a school or institutional setting, you (the tutor) are responsible for ensuring compliance with FERPA and any applicable state laws. TutorGuide AI is a tool for individual tutors and is not a FERPA-compliant service provider.
+
+7. DATA RETENTION & DELETION
+Your data is retained until you delete it. You may delete any session, student record, or your entire account at any time from within the app. Deleted data is permanently removed and cannot be recovered.
+
+8. CONTACT
+Questions or concerns about your data? Contact us at hello@tutorguideai.com.
 
 By creating an account, you agree to these terms.`;
 
@@ -652,8 +659,8 @@ function StudentProgressPage({ user, tutorName, avatarUrl, onNavigate, onSignOut
   const fetchData = async () => {
     setLoading(true);
     const [{ data: studentsData }, { data: sessionsData }] = await Promise.all([
-      supabase.from("students").select("*").order("name"),
-      supabase.from("sessions").select("*").order("created_at"),
+      supabase.from("students").select("*").eq("tutor_id", user.id).order("name"),
+      supabase.from("sessions").select("*").eq("tutor_id", user.id).order("created_at"),
     ]);
     setStudents(studentsData || []);
     setSessions(sessionsData || []);
@@ -664,7 +671,7 @@ function StudentProgressPage({ user, tutorName, avatarUrl, onNavigate, onSignOut
     if (!newName.trim()) return setFormError("Name is required.");
     setFormLoading(true); setFormError("");
     if (editingStudent) {
-      const { error } = await supabase.from("students").update({ name: newName, grade: newGrade, primary_subject: newSubject, notes: newNotes }).eq("id", editingStudent.id);
+      const { error } = await supabase.from("students").update({ name: newName, grade: newGrade, primary_subject: newSubject, notes: newNotes }).eq("id", editingStudent.id).eq("tutor_id", user.id);
       if (error) setFormError(error.message);
       else { await fetchData(); setEditingStudent(null); setShowAddStudent(false); resetForm(); }
     } else {
@@ -677,7 +684,7 @@ function StudentProgressPage({ user, tutorName, avatarUrl, onNavigate, onSignOut
 
   const deleteStudent = async (id) => {
     if (!confirm("Delete this student?")) return;
-    await supabase.from("students").delete().eq("id", id);
+    await supabase.from("students").delete().eq("id", id).eq("tutor_id", user.id);
     setStudents((prev) => prev.filter((s) => s.id !== id));
     if (selectedStudent?.id === id) setSelectedStudent(null);
   };
@@ -836,7 +843,7 @@ function DashboardScreen({ user, tutorName, avatarUrl, onNavigate, onSignOut, on
 
   const fetchSessions = async () => {
     setLoading(true);
-    const { data } = await supabase.from("sessions").select("*").order("created_at", { ascending: false });
+    const { data } = await supabase.from("sessions").select("*").eq("tutor_id", user.id).order("created_at", { ascending: false });
     setSessions(data || []);
     setLoading(false);
   };
@@ -1218,7 +1225,7 @@ export default function App() {
   }, []);
 
   useEffect(() => { if (user) fetchStudents(); }, [user]);
-  const fetchStudents = async () => { const { data } = await supabase.from("students").select("*").order("name"); setStudents(data || []); };
+  const fetchStudents = async () => { const { data } = await supabase.from("students").select("*").eq("tutor_id", user.id).order("name"); setStudents(data || []); };
 
   useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
   useEffect(() => { transcriptEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [transcript, interimText]);

@@ -1,11 +1,37 @@
 import os
+import re
 from flask import Flask, request, jsonify
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 from groq import Groq
 from dotenv import load_dotenv
 
 load_dotenv()
 
 app = Flask(__name__)
+
+limiter = Limiter(
+    key_func=get_remote_address,
+    app=app,
+    default_limits=["200 per day", "50 per hour"],
+    storage_uri="memory://",
+)
+
+ALLOWED_FEELINGS = {"Engaged", "Confused", "Frustrated", "Disengaged", "Breakthrough"}
+ALLOWED_ROLES = {"user", "assistant"}
+
+def sanitize(value, max_length=2000):
+    """Strip control characters and enforce a max length."""
+    if not isinstance(value, str):
+        return ""
+    value = value.strip()
+    # Remove null bytes and other non-printable control characters (keep newlines/tabs)
+    value = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]", "", value)
+    return value[:max_length]
+
+@app.errorhandler(429)
+def rate_limit_handler(e):
+    return jsonify({"error": "Too many requests. Please slow down and try again shortly."}), 429
 
 @app.after_request
 def add_cors_headers(response):
@@ -221,29 +247,44 @@ def build_system_prompt(subject, topic, session_plan, feelings):
 
 
 @app.route("/chat", methods=["POST", "OPTIONS"])
+@limiter.limit("30 per minute;200 per day", methods=["POST"])
 def chat():
     if request.method == "OPTIONS":
         return jsonify({}), 200
 
-    data = request.get_json()
-    messages = data.get("messages", [])
-    subject = data.get("subject", "")
-    topic = data.get("topic", "")
-    session_plan = data.get("sessionPlan", "")
-    feelings = data.get("feelings", [])
-    transcript = data.get("transcript", "").strip()
+    data = request.get_json(silent=True)
+    if not data or not isinstance(data, dict):
+        return jsonify({"error": "Invalid request body."}), 400
+
+    raw_messages = data.get("messages", [])
+    if not isinstance(raw_messages, list) or len(raw_messages) > 100:
+        return jsonify({"error": "Invalid messages."}), 400
+
+    subject      = sanitize(data.get("subject", ""), max_length=100)
+    topic        = sanitize(data.get("topic", ""), max_length=100)
+    session_plan = sanitize(data.get("sessionPlan", ""), max_length=2000)
+    transcript   = sanitize(data.get("transcript", ""), max_length=5000)
+
+    raw_feelings = data.get("feelings", [])
+    feelings = [f for f in raw_feelings if isinstance(f, str) and f in ALLOWED_FEELINGS] \
+               if isinstance(raw_feelings, list) else []
+
+    messages = []
+    for m in raw_messages:
+        if not isinstance(m, dict):
+            continue
+        role    = m.get("role", "")
+        content = m.get("content", "")
+        if role not in ALLOWED_ROLES or not isinstance(content, str):
+            continue
+        messages.append({"role": role, "content": sanitize(content, max_length=4000)})
 
     system = build_system_prompt(subject, topic, session_plan, feelings)
 
     if transcript:
         system += f"\n\n--- LIVE TRANSCRIPT ---\n{transcript}"
 
-    groq_messages = [{"role": "system", "content": system}]
-    for m in messages:
-        groq_messages.append({
-            "role": m["role"],
-            "content": m["content"]
-        })
+    groq_messages = [{"role": "system", "content": system}] + messages
 
     try:
         response = client.chat.completions.create(
@@ -262,13 +303,20 @@ def chat():
 
 
 @app.route("/generate-plan", methods=["POST", "OPTIONS"])
+@limiter.limit("10 per minute;50 per day", methods=["POST"])
 def generate_plan():
     if request.method == "OPTIONS":
         return jsonify({}), 200
 
-    data = request.get_json()
-    subject = data.get("subject", "")
-    topic = data.get("topic", "")
+    data = request.get_json(silent=True)
+    if not data or not isinstance(data, dict):
+        return jsonify({"error": "Invalid request body."}), 400
+
+    subject = sanitize(data.get("subject", ""), max_length=100)
+    topic   = sanitize(data.get("topic", ""), max_length=100)
+
+    if not subject or not topic:
+        return jsonify({"error": "Subject and topic are required."}), 400
 
     prompt = f"""Generate a concise session plan for a peer math tutor teaching:
 Subject: {subject}

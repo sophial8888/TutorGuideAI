@@ -13,12 +13,7 @@ export default function Footer() {
         {/* Brand */}
         <div className="flex flex-col gap-4">
           <a href="#home" className="flex items-center gap-2 w-fit">
-            <div className="w-9 h-9 rounded-xl bg-[#FFD93D] flex items-center justify-center">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M12 2L3 7v10l9 5 9-5V7L12 2z" fill="white" fillOpacity="0.2" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
-                <path d="M8 10h2m0 0h4m-4 0v4m4-4v4m0 0H8" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-              </svg>
-            </div>
+            <img src="/src/assets/tutorguidelogo.png" alt="TutorGuide AI" className="h-9 w-auto" />
             <span className="font-heading text-lg font-semibold text-white">
               TutorGuide <span className="text-[#5BC0EB]">AI</span>
             </span>
@@ -96,9 +91,10 @@ export default function Footer() {
         <p className="text-xs text-white/40">
           © {new Date().getFullYear()} TutorGuide AI. All rights reserved.
         </p>
-        <p className="text-xs text-white/40">
-          Built with React + Flask · Math tutoring, made smarter.
-        </p>
+        <div className="flex items-center gap-4">
+          <a href="/privacy" className="text-xs text-white/40 hover:text-white/70 transition-colors duration-200">Privacy Policy & Terms</a>
+          <p className="text-xs text-white/40">Built with React + Flask · Math tutoring, made smarter.</p>
+        </div>
       </div>
     </footer>
   );
