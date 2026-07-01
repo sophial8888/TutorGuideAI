@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { supabase } from "../supabase";
 
 const CHATBOT_URL = import.meta.env.VITE_CHATBOT_URL || "http://localhost:5173/";
@@ -9,15 +9,6 @@ export default function CTASection() {
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState("idle");
   const [message, setMessage] = useState("");
-
-  // Prefill the email if the visitor entered one in the hero form.
-  useEffect(() => {
-    const prefill = sessionStorage.getItem("signup_email");
-    if (prefill) {
-      setEmail(prefill);
-      sessionStorage.removeItem("signup_email");
-    }
-  }, []);
 
   const handleGoogleSignUp = async () => {
     setStatus("loading");

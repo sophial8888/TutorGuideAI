@@ -1,13 +1,5 @@
-import { useState } from "react";
-
 export default function Hero() {
-  const [email, setEmail] = useState("");
-
-  // Carry the email into the full signup form (CTASection) and scroll to it,
-  // where the visitor finishes creating their tutor account.
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (email) sessionStorage.setItem("signup_email", email);
+  const handleGetStarted = () => {
     document.getElementById("signup")?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -47,35 +39,21 @@ export default function Hero() {
           </p>
 
           {/* Quick signup */}
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md">
-            <input
-              type="email"
-              required
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="flex-1 px-4 py-3 rounded-full border-2 border-gray-200 bg-white text-dark placeholder-dark/40 focus:outline-none focus:border-[#5BC0EB] transition-colors duration-200 text-sm"
-            />
+          <div className="max-w-md">
             <button
-              type="submit"
+              type="button"
+              onClick={handleGetStarted}
               className="bg-[#5BC0EB] text-white font-semibold text-sm px-6 py-3 rounded-full shadow-lg shadow-blue-200 hover:scale-105 transition-transform duration-300 whitespace-nowrap"
             >
               Get Started Free
             </button>
-          </form>
+          </div>
 
           {/* Social proof */}
-          <div className="flex items-center gap-4 flex-wrap">
-            <div className="flex -space-x-2">
-              {["women/44", "men/32", "women/68", "men/15"].map((id) => (
-                <img
-                  key={id}
-                  src={`https://randomuser.me/api/portraits/${id}.jpg`}
-                  alt="user"
-                  className="w-8 h-8 rounded-full border-2 border-white object-cover"
-                />
-              ))}
-            </div>
+          <div className="flex items-center gap-2 flex-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#FFD93D">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
             <p className="text-sm text-dark/60">
               <span className="font-bold text-dark">500+</span> peer tutors already using TutorGuide AI
             </p>

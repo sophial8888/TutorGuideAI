@@ -51,69 +51,69 @@ const CURRICULUM = {
 
 const RESOURCES = {
   "Algebra": [
-    { name: "Khan Academy — Algebra 1", source: "Khan Academy", desc: "Full course with videos and practice problems covering linear equations, systems, and quadratics.", type: "🎯 Practice", url: "https://www.khanacademy.org/math/algebra" },
-    { name: "Khan Academy — Algebra 2", source: "Khan Academy", desc: "Videos and exercises on polynomials, exponentials, logarithms, and complex numbers.", type: "🎯 Practice", url: "https://www.khanacademy.org/math/algebra2" },
-    { name: "OpenStax Elementary Algebra", source: "OpenStax", desc: "Free peer-reviewed textbook covering foundational algebra topics from basics to quadratics.", type: "📖 Textbook", url: "https://openstax.org/details/books/elementary-algebra-2e" },
-    { name: "OpenStax Intermediate Algebra", source: "OpenStax", desc: "Free textbook bridging elementary algebra and college-level topics including rational expressions.", type: "📖 Textbook", url: "https://openstax.org/details/books/intermediate-algebra-2e" },
-    { name: "Paul's Notes — Algebra", source: "Paul's Online Math Notes", desc: "Comprehensive algebra notes with worked examples and practice problems with full solutions.", type: "📖 Textbook", url: "https://tutorial.math.lamar.edu/Classes/Alg/Alg.aspx" },
+    { name: "Khan Academy — Algebra 1", source: "Khan Academy", desc: "Full course with videos and practice problems covering linear equations, systems, and quadratics.", type: "Practice", url: "https://www.khanacademy.org/math/algebra" },
+    { name: "Khan Academy — Algebra 2", source: "Khan Academy", desc: "Videos and exercises on polynomials, exponentials, logarithms, and complex numbers.", type: "Practice", url: "https://www.khanacademy.org/math/algebra2" },
+    { name: "OpenStax Elementary Algebra", source: "OpenStax", desc: "Free peer-reviewed textbook covering foundational algebra topics from basics to quadratics.", type: "Textbook", url: "https://openstax.org/details/books/elementary-algebra-2e" },
+    { name: "OpenStax Intermediate Algebra", source: "OpenStax", desc: "Free textbook bridging elementary algebra and college-level topics including rational expressions.", type: "Textbook", url: "https://openstax.org/details/books/intermediate-algebra-2e" },
+    { name: "Paul's Notes — Algebra", source: "Paul's Online Math Notes", desc: "Comprehensive algebra notes with worked examples and practice problems with full solutions.", type: "Textbook", url: "https://tutorial.math.lamar.edu/Classes/Alg/Alg.aspx" },
   ],
   "Geometry": [
-    { name: "Khan Academy — Geometry", source: "Khan Academy", desc: "Full geometry course covering proofs, triangles, circles, and transformations with practice.", type: "🎯 Practice", url: "https://www.khanacademy.org/math/geometry" },
-    { name: "Khan Academy — High School Geometry", source: "Khan Academy", desc: "Aligned to high school standards with congruence, similarity, and coordinate geometry.", type: "🎯 Practice", url: "https://www.khanacademy.org/math/geometry-home" },
-    { name: "GeoGebra Geometry", source: "GeoGebra", desc: "Interactive geometry tool for constructing and exploring shapes, proofs, and transformations.", type: "🛠 Tool", url: "https://www.geogebra.org/geometry" },
-    { name: "GeoGebra Graphing Calculator", source: "GeoGebra", desc: "Free graphing tool useful for visualizing geometric relationships and coordinate geometry.", type: "🛠 Tool", url: "https://www.geogebra.org/graphing" },
+    { name: "Khan Academy — Geometry", source: "Khan Academy", desc: "Full geometry course covering proofs, triangles, circles, and transformations with practice.", type: "Practice", url: "https://www.khanacademy.org/math/geometry" },
+    { name: "Khan Academy — High School Geometry", source: "Khan Academy", desc: "Aligned to high school standards with congruence, similarity, and coordinate geometry.", type: "Practice", url: "https://www.khanacademy.org/math/geometry-home" },
+    { name: "GeoGebra Geometry", source: "GeoGebra", desc: "Interactive geometry tool for constructing and exploring shapes, proofs, and transformations.", type: "Tool", url: "https://www.geogebra.org/geometry" },
+    { name: "GeoGebra Graphing Calculator", source: "GeoGebra", desc: "Free graphing tool useful for visualizing geometric relationships and coordinate geometry.", type: "Tool", url: "https://www.geogebra.org/graphing" },
   ],
   "Trigonometry": [
-    { name: "Khan Academy — Trigonometry", source: "Khan Academy", desc: "Full trig course covering unit circle, trig functions, identities, and inverse functions.", type: "🎯 Practice", url: "https://www.khanacademy.org/math/trigonometry" },
-    { name: "Paul's Notes — Algebra/Trig Review", source: "Paul's Online Math Notes", desc: "Comprehensive review of trig fundamentals including the unit circle and all trig identities.", type: "📖 Textbook", url: "https://tutorial.math.lamar.edu/Extras/AlgebraTrigReview/AlgebraIntro.aspx" },
-    { name: "GeoGebra — Unit Circle", source: "GeoGebra", desc: "Interactive unit circle tool — great for visualizing angles, reference angles, and trig values.", type: "🛠 Tool", url: "https://www.geogebra.org/m/ZPaPHzCi" },
-    { name: "OpenStax Algebra & Trigonometry", source: "OpenStax", desc: "Free textbook covering trigonometry in depth alongside algebra review, with 5,900+ exercises.", type: "📖 Textbook", url: "https://openstax.org/details/books/algebra-and-trigonometry-2e" },
+    { name: "Khan Academy — Trigonometry", source: "Khan Academy", desc: "Full trig course covering unit circle, trig functions, identities, and inverse functions.", type: "Practice", url: "https://www.khanacademy.org/math/trigonometry" },
+    { name: "Paul's Notes — Algebra/Trig Review", source: "Paul's Online Math Notes", desc: "Comprehensive review of trig fundamentals including the unit circle and all trig identities.", type: "Textbook", url: "https://tutorial.math.lamar.edu/Extras/AlgebraTrigReview/AlgebraIntro.aspx" },
+    { name: "GeoGebra — Unit Circle", source: "GeoGebra", desc: "Interactive unit circle tool — great for visualizing angles, reference angles, and trig values.", type: "Tool", url: "https://www.geogebra.org/m/ZPaPHzCi" },
+    { name: "OpenStax Algebra & Trigonometry", source: "OpenStax", desc: "Free textbook covering trigonometry in depth alongside algebra review, with 5,900+ exercises.", type: "Textbook", url: "https://openstax.org/details/books/algebra-and-trigonometry-2e" },
   ],
   "Algebra II": [
-    { name: "Khan Academy — Algebra 2", source: "Khan Academy", desc: "Full Algebra 2 course with videos and practice covering polynomials, logs, and conics.", type: "🎯 Practice", url: "https://www.khanacademy.org/math/algebra2" },
-    { name: "OpenStax College Algebra", source: "OpenStax", desc: "Free textbook covering Algebra II topics at a college level — excellent explanations and exercises.", type: "📖 Textbook", url: "https://openstax.org/details/books/college-algebra-2e" },
-    { name: "Paul's Notes — Algebra", source: "Paul's Online Math Notes", desc: "Thorough algebra notes including exponential and logarithmic functions with worked examples.", type: "📖 Textbook", url: "https://tutorial.math.lamar.edu/Classes/Alg/Alg.aspx" },
-    { name: "GeoGebra Graphing Calculator", source: "GeoGebra", desc: "Visualize polynomial functions, exponential curves, and logarithms interactively.", type: "🛠 Tool", url: "https://www.geogebra.org/graphing" },
+    { name: "Khan Academy — Algebra 2", source: "Khan Academy", desc: "Full Algebra 2 course with videos and practice covering polynomials, logs, and conics.", type: "Practice", url: "https://www.khanacademy.org/math/algebra2" },
+    { name: "OpenStax College Algebra", source: "OpenStax", desc: "Free textbook covering Algebra II topics at a college level — excellent explanations and exercises.", type: "Textbook", url: "https://openstax.org/details/books/college-algebra-2e" },
+    { name: "Paul's Notes — Algebra", source: "Paul's Online Math Notes", desc: "Thorough algebra notes including exponential and logarithmic functions with worked examples.", type: "Textbook", url: "https://tutorial.math.lamar.edu/Classes/Alg/Alg.aspx" },
+    { name: "GeoGebra Graphing Calculator", source: "GeoGebra", desc: "Visualize polynomial functions, exponential curves, and logarithms interactively.", type: "Tool", url: "https://www.geogebra.org/graphing" },
   ],
   "Pre-Calculus": [
-    { name: "Khan Academy — Precalculus", source: "Khan Academy", desc: "Full precalculus course covering functions, trigonometry, vectors, and intro to limits.", type: "🎯 Practice", url: "https://www.khanacademy.org/math/precalculus" },
-    { name: "OpenStax Precalculus 2e", source: "OpenStax", desc: "Free peer-reviewed textbook with 5,900+ exercises across 12 chapters from functions to limits.", type: "📖 Textbook", url: "https://openstax.org/details/books/precalculus-2e" },
-    { name: "Paul's Notes — Algebra/Trig Review", source: "Paul's Online Math Notes", desc: "Essential review of algebra and trig topics needed before calculus — great for bridging gaps.", type: "📖 Textbook", url: "https://tutorial.math.lamar.edu/Extras/AlgebraTrigReview/AlgebraIntro.aspx" },
-    { name: "MyOpenMath", source: "MyOpenMath", desc: "Free online homework system with randomized practice problems for precalculus topics.", type: "🎯 Practice", url: "https://www.myopenmath.com" },
+    { name: "Khan Academy — Precalculus", source: "Khan Academy", desc: "Full precalculus course covering functions, trigonometry, vectors, and intro to limits.", type: "Practice", url: "https://www.khanacademy.org/math/precalculus" },
+    { name: "OpenStax Precalculus 2e", source: "OpenStax", desc: "Free peer-reviewed textbook with 5,900+ exercises across 12 chapters from functions to limits.", type: "Textbook", url: "https://openstax.org/details/books/precalculus-2e" },
+    { name: "Paul's Notes — Algebra/Trig Review", source: "Paul's Online Math Notes", desc: "Essential review of algebra and trig topics needed before calculus — great for bridging gaps.", type: "Textbook", url: "https://tutorial.math.lamar.edu/Extras/AlgebraTrigReview/AlgebraIntro.aspx" },
+    { name: "MyOpenMath", source: "MyOpenMath", desc: "Free online homework system with randomized practice problems for precalculus topics.", type: "Practice", url: "https://www.myopenmath.com" },
   ],
   "Calculus AB": [
-    { name: "Khan Academy — AP Calculus AB", source: "Khan Academy", desc: "Full AP Calculus AB course with videos, practice, and exam prep covering limits, derivatives, and integrals.", type: "🎯 Practice", url: "https://www.khanacademy.org/math/ap-calculus-ab" },
-    { name: "OpenStax Calculus Volume 1", source: "OpenStax", desc: "Free peer-reviewed calculus textbook covering limits, derivatives, and integration thoroughly.", type: "📖 Textbook", url: "https://openstax.org/details/books/calculus-volume-1" },
-    { name: "Paul's Notes — Calculus I", source: "Paul's Online Math Notes", desc: "Comprehensive Calculus I notes with worked examples, practice problems, and full solutions.", type: "📖 Textbook", url: "https://tutorial.math.lamar.edu/Classes/CalcI/CalcI.aspx" },
-    { name: "Paul's Calculus Cheat Sheet", source: "Paul's Online Math Notes", desc: "Printable reference sheet covering limits, derivatives, and integrals — perfect for quick review.", type: "🛠 Tool", url: "https://tutorial.math.lamar.edu/getfile.aspx?file=B,40,N" },
-    { name: "MIT OpenCourseWare — Calculus", source: "MIT OCW", desc: "Full MIT calculus course materials including lecture notes, exams, and problem sets.", type: "📖 Textbook", url: "https://ocw.mit.edu/courses/mathematics/" },
+    { name: "Khan Academy — AP Calculus AB", source: "Khan Academy", desc: "Full AP Calculus AB course with videos, practice, and exam prep covering limits, derivatives, and integrals.", type: "Practice", url: "https://www.khanacademy.org/math/ap-calculus-ab" },
+    { name: "OpenStax Calculus Volume 1", source: "OpenStax", desc: "Free peer-reviewed calculus textbook covering limits, derivatives, and integration thoroughly.", type: "Textbook", url: "https://openstax.org/details/books/calculus-volume-1" },
+    { name: "Paul's Notes — Calculus I", source: "Paul's Online Math Notes", desc: "Comprehensive Calculus I notes with worked examples, practice problems, and full solutions.", type: "Textbook", url: "https://tutorial.math.lamar.edu/Classes/CalcI/CalcI.aspx" },
+    { name: "Paul's Calculus Cheat Sheet", source: "Paul's Online Math Notes", desc: "Printable reference sheet covering limits, derivatives, and integrals — perfect for quick review.", type: "Tool", url: "https://tutorial.math.lamar.edu/getfile.aspx?file=B,40,N" },
+    { name: "MIT OpenCourseWare — Calculus", source: "MIT OCW", desc: "Full MIT calculus course materials including lecture notes, exams, and problem sets.", type: "Textbook", url: "https://ocw.mit.edu/courses/mathematics/" },
   ],
   "Calculus BC": [
-    { name: "Khan Academy — AP Calculus BC", source: "Khan Academy", desc: "Full AP Calculus BC course with videos and practice including series, parametric, and polar.", type: "🎯 Practice", url: "https://www.khanacademy.org/math/ap-calculus-bc" },
-    { name: "OpenStax Calculus Volume 2", source: "OpenStax", desc: "Free textbook covering integration techniques, sequences, series, and parametric equations.", type: "📖 Textbook", url: "https://openstax.org/details/books/calculus-volume-2" },
-    { name: "Paul's Notes — Calculus II", source: "Paul's Online Math Notes", desc: "Calculus II notes covering integration techniques, series, and parametric/polar coordinates.", type: "📖 Textbook", url: "https://tutorial.math.lamar.edu/Classes/CalcII/CalcII.aspx" },
-    { name: "Paul's Calculus Cheat Sheet", source: "Paul's Online Math Notes", desc: "Comprehensive printable cheat sheet covering all major calculus formulas and theorems.", type: "🛠 Tool", url: "https://tutorial.math.lamar.edu/getfile.aspx?file=B,40,N" },
-    { name: "MIT OpenCourseWare — Calculus", source: "MIT OCW", desc: "Full MIT calculus course with lecture notes, assignments, and exams freely available.", type: "📖 Textbook", url: "https://ocw.mit.edu/courses/mathematics/" },
+    { name: "Khan Academy — AP Calculus BC", source: "Khan Academy", desc: "Full AP Calculus BC course with videos and practice including series, parametric, and polar.", type: "Practice", url: "https://www.khanacademy.org/math/ap-calculus-bc" },
+    { name: "OpenStax Calculus Volume 2", source: "OpenStax", desc: "Free textbook covering integration techniques, sequences, series, and parametric equations.", type: "Textbook", url: "https://openstax.org/details/books/calculus-volume-2" },
+    { name: "Paul's Notes — Calculus II", source: "Paul's Online Math Notes", desc: "Calculus II notes covering integration techniques, series, and parametric/polar coordinates.", type: "Textbook", url: "https://tutorial.math.lamar.edu/Classes/CalcII/CalcII.aspx" },
+    { name: "Paul's Calculus Cheat Sheet", source: "Paul's Online Math Notes", desc: "Comprehensive printable cheat sheet covering all major calculus formulas and theorems.", type: "Tool", url: "https://tutorial.math.lamar.edu/getfile.aspx?file=B,40,N" },
+    { name: "MIT OpenCourseWare — Calculus", source: "MIT OCW", desc: "Full MIT calculus course with lecture notes, assignments, and exams freely available.", type: "Textbook", url: "https://ocw.mit.edu/courses/mathematics/" },
   ],
 };
 
 const TYPE_COLORS = {
-  "📖 Textbook": { bg: "#ede9fe", color: "#5b21b6" },
-  "🎯 Practice": { bg: "#dcfce7", color: "#15803d" },
-  "🛠 Tool": { bg: "#e0f2fe", color: "#0369a1" },
+  "Textbook": { bg: "#ede9fe", color: "#5b21b6", icon: "book" },
+  "Practice": { bg: "#dcfce7", color: "#15803d", icon: "target" },
+  "Tool": { bg: "#e0f2fe", color: "#0369a1", icon: "wrench" },
 };
 
-const SOURCE_ICONS = {
-  "Khan Academy": "🟢",
-  "OpenStax": "🔵",
-  "Paul's Online Math Notes": "🟣",
-  "GeoGebra": "🟠",
-  "MIT OCW": "🔴",
-  "MyOpenMath": "🟡",
+const SOURCE_COLORS = {
+  "Khan Academy": "#22c55e",
+  "OpenStax": "#3b82f6",
+  "Paul's Online Math Notes": "#a855f7",
+  "GeoGebra": "#f97316",
+  "MIT OCW": "#ef4444",
+  "MyOpenMath": "#eab308",
 };
 
 const FEELINGS = ["Engaged", "Confused", "Frustrated", "Disengaged", "Breakthrough"];
-const FEELING_EMOJI = { Engaged: "⚡", Confused: "😕", Frustrated: "😤", Disengaged: "😶", Breakthrough: "🌟" };
+const FEELING_ICON = { Engaged: "lightning", Confused: "confused", Frustrated: "frustrated", Disengaged: "muted", Breakthrough: "star" };
 const FEELING_COLORS = { Engaged: "#22c55e", Confused: "#f59e0b", Frustrated: "#ef4444", Disengaged: "#94a3b8", Breakthrough: "#a855f7" };
 
 const GRADES = ["9th grade", "10th grade", "11th grade", "12th grade", "College"];
@@ -129,11 +129,11 @@ const GRADE_COLORS = {
 };
 
 const NAV_ITEMS = [
-  { icon: "⊞", label: "Dashboard" },
-  { icon: "▶", label: "Live Sessions" },
-  { icon: "📈", label: "Student Progress" },
-  { icon: "📚", label: "Resources" },
-  { icon: "⚙", label: "Settings" },
+  { icon: "grid", label: "Dashboard" },
+  { icon: "play", label: "Live Sessions" },
+  { icon: "chart", label: "Student Progress" },
+  { icon: "book", label: "Resources" },
+  { icon: "gear", label: "Settings" },
 ];
 
 const PURPLE = "#7c3aed";
@@ -141,9 +141,185 @@ const PURPLE_LIGHT = "#a78bfa";
 const SIDEBAR_BG = "#1e1b2e";
 const FONT = "'Fredoka', system-ui, sans-serif";
 
+// Duotone icons (outline + soft fill) replacing emoji glyphs throughout the app.
+const ICON_PATHS = {
+  hint: (
+    <>
+      <path d="M12 3a6 6 0 0 0-3.6 10.8c.6.45 1.1 1.2 1.1 2.2h5c0-1 .5-1.75 1.1-2.2A6 6 0 0 0 12 3z" strokeLinejoin="round" />
+      <path d="M9.5 18h5M10.3 21h3.4" strokeLinecap="round" />
+    </>
+  ),
+  practice: (
+    <>
+      <path d="M4 20l1-4L15.5 5.5l3 3L8 19l-4 1z" strokeLinejoin="round" strokeLinecap="round" fill="none" />
+      <path d="M15.5 5.5l3 3-2 2-3-3 2-2z" strokeLinejoin="round" />
+    </>
+  ),
+  book: (
+    <>
+      <path d="M12 6.5c-1.5-1-3.7-1.5-6-1.5-.6 0-1 .4-1 1v11c0 .6.4 1 1 1 2.3 0 4.5.5 6 1.5 1.5-1 3.7-1.5 6-1.5.6 0 1-.4 1-1V6c0-.6-.4-1-1-1-2.3 0-4.5.5-6 1.5z" strokeLinejoin="round" />
+      <path d="M12 6.5V19" strokeLinecap="round" fill="none" />
+    </>
+  ),
+  arrow: (
+    <>
+      <rect x="3" y="3" width="18" height="18" rx="6" />
+      <path d="M8 12h8M13 8l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </>
+  ),
+  lightning: <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" strokeLinejoin="round" />,
+  confused: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M9.6 9.8a2.4 2.4 0 0 1 4.5-1.2c.5.9.2 1.6-.6 2.2-.7.5-1.3.9-1.3 2" strokeLinecap="round" fill="none" />
+      <path d="M12 15.8v.01" strokeLinecap="round" strokeWidth="2.6" />
+    </>
+  ),
+  frustrated: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M8 10.3l2.2-1.3M16 10.3l-2.2-1.3" strokeLinecap="round" fill="none" />
+      <path d="M8.5 16c1-1.2 2.2-1.8 3.5-1.8s2.5.6 3.5 1.8" strokeLinecap="round" fill="none" />
+    </>
+  ),
+  muted: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M8.7 10.2v.01M15.3 10.2v.01" strokeLinecap="round" strokeWidth="2.6" />
+      <path d="M8.5 15.3h7" strokeLinecap="round" fill="none" />
+    </>
+  ),
+  star: <path d="M12 3l2.1 5.6L20 11l-5.9 2.1L12 19l-2.1-5.9L4 11l5.9-2.4L12 3z" strokeLinejoin="round" />,
+  target: (
+    <>
+      <circle cx="12" cy="12" r="8.5" />
+      <circle cx="12" cy="12" r="4" fill="none" />
+      <path d="M12 12v.01" strokeLinecap="round" strokeWidth="2.6" />
+    </>
+  ),
+  wrench: <path d="M20.5 6.5a4.2 4.2 0 0 1-5.6 5.6L7 20 4 17l7.9-7.9A4.2 4.2 0 0 1 17.5 3.5l-3 3 2 2 3-2z" strokeLinejoin="round" />,
+  chart: (
+    <>
+      <path d="M4 20V4.8" strokeLinecap="round" fill="none" />
+      <path d="M4 20h16.2" strokeLinecap="round" fill="none" />
+      <rect x="7" y="13" width="2.6" height="7" rx="1" />
+      <rect x="12.2" y="8" width="2.6" height="12" rx="1" />
+      <rect x="17.4" y="10.5" width="2.6" height="9.5" rx="1" />
+    </>
+  ),
+  gear: (
+    <>
+      <circle cx="12" cy="12" r="3.2" />
+      <path d="M12 2.5v3M12 18.5v3M21.5 12h-3M5.5 12h-3M18.5 5.5l-2.1 2.1M7.6 16.4l-2.1 2.1M18.5 18.5l-2.1-2.1M7.6 7.6 5.5 5.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+  help: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M9.5 9.3a2.5 2.5 0 0 1 4.6-1.3c.6.9.3 1.7-.5 2.3-.8.6-1.4 1-1.4 2.2" strokeLinecap="round" fill="none" />
+      <path d="M12 16.6v.01" strokeLinecap="round" strokeWidth="2.6" />
+    </>
+  ),
+  pin: (
+    <>
+      <path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z" strokeLinejoin="round" />
+      <circle cx="12" cy="9" r="2.3" fill="none" />
+    </>
+  ),
+  trash: (
+    <>
+      <path d="M5 7h14M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M7 7l1 13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1l1-13" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M10 11v6M14 11v6" strokeLinecap="round" fill="none" />
+    </>
+  ),
+  user: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="10" r="2.6" fill="none" />
+      <path d="M6.5 18.5c1.3-2.6 3.4-3.5 5.5-3.5s4.2.9 5.5 3.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+  calendar: (
+    <>
+      <rect x="3.5" y="5" width="17" height="15" rx="2.5" />
+      <path d="M3.5 9.5h17M8 3v3.5M16 3v3.5" strokeLinecap="round" fill="none" />
+      <path d="M12 13v.01" strokeLinecap="round" strokeWidth="2.6" />
+    </>
+  ),
+  clipboard: (
+    <>
+      <rect x="5" y="4.5" width="14" height="17" rx="2.5" />
+      <rect x="9" y="3" width="6" height="3" rx="1" fill="none" />
+      <path d="M8.5 11h7M8.5 14.5h7M8.5 18h4.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+  clock: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7.5V12l3.2 2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </>
+  ),
+  chat: <path d="M4 5.5h16a1 1 0 0 1 1 1V15a1 1 0 0 1-1 1H9l-4.5 4V16H4a1 1 0 0 1-1-1V6.5a1 1 0 0 1 1-1z" strokeLinejoin="round" />,
+  snowflake: (
+    <path d="M12 3v18M4.6 7.5l14.8 9M19.4 7.5 4.6 16.5" strokeLinecap="round" fill="none" />
+  ),
+  warning: (
+    <>
+      <path d="M12 3.5 21 19H3L12 3.5z" strokeLinejoin="round" />
+      <path d="M12 10v4" strokeLinecap="round" fill="none" />
+      <path d="M12 16.7v.01" strokeLinecap="round" strokeWidth="2.6" />
+    </>
+  ),
+  mic: (
+    <>
+      <rect x="9" y="3" width="6" height="11" rx="3" />
+      <path d="M6 11a6 6 0 0 0 12 0M12 17v3.5M9 20.5h6" strokeLinecap="round" fill="none" />
+    </>
+  ),
+  eye: (
+    <>
+      <path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12z" strokeLinejoin="round" />
+      <circle cx="12" cy="12" r="2.6" fill="none" />
+    </>
+  ),
+  eyeOff: (
+    <path d="M3.5 3.5l17 17M9.9 5.6A10.4 10.4 0 0 1 12 5.5c6.5 0 10 6.5 10 6.5a15.7 15.7 0 0 1-3.3 4.1M6.5 7.3A15.6 15.6 0 0 0 2 12s3.5 6.5 10 6.5c1.2 0 2.3-.2 3.3-.5M14.1 14.1a2.6 2.6 0 0 1-3.7-3.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+  ),
+  play: <path d="M7 4.5v15l13-7.5-13-7.5z" strokeLinejoin="round" />,
+  stop: <rect x="6" y="6" width="12" height="12" rx="3" />,
+  smile: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M8.5 10.2v.01M15.5 10.2v.01" strokeLinecap="round" strokeWidth="2.6" />
+      <path d="M8 14.3c1 1.4 2.4 2.1 4 2.1s3-.7 4-2.1" strokeLinecap="round" fill="none" />
+    </>
+  ),
+  grid: (
+    <>
+      <rect x="3.5" y="3.5" width="7.5" height="7.5" rx="1.8" />
+      <rect x="13" y="3.5" width="7.5" height="7.5" rx="1.8" />
+      <rect x="3.5" y="13" width="7.5" height="7.5" rx="1.8" />
+      <rect x="13" y="13" width="7.5" height="7.5" rx="1.8" />
+    </>
+  ),
+};
+
+function Icon({ type, stroke, fill = "none", size = 20, style }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={fill} stroke={stroke} strokeWidth="1.8" style={style}>
+      {ICON_PATHS[type]}
+    </svg>
+  );
+}
+
 // Where the landing page (landingpage/frontend) is served.
 // Local dev falls back to localhost; set VITE_LANDING_URL to the deployed URL for production.
 const LANDING_URL = import.meta.env.VITE_LANDING_URL || "http://localhost:5174";
+
+// Base URL for the Flask API (app.py). Empty string in local dev relies on the
+// Vite proxy in vite.config.js; set VITE_API_URL to the deployed backend's URL
+// in production, since frontend and backend won't share an origin there.
+const API_URL = import.meta.env.VITE_API_URL || "";
 
 const PRIVACY_POLICY = `TUTORGUIDE AI — PRIVACY POLICY & TERMS OF SERVICE
 
@@ -248,14 +424,14 @@ function Sidebar({ activeLabel, onNavigate, onSignOut, collapsed, onToggle }) {
                 else if (item.label === "Resources") onNavigate("resources");
                 else if (item.label === "Settings") onNavigate("settings");
               }}>
-              <span style={s.navIcon}>{item.icon}</span><span>{item.label}</span>
+              <Icon type={item.icon} stroke="currentColor" fill="none" size={16} style={s.navIcon} /><span>{item.label}</span>
             </button>
           ))}
         </nav>
       </div>
       <div style={s.sidebarBottom}>
         <button style={s.newSessionSideBtn} onClick={() => onNavigate("newSession")}>+ Start New Session</button>
-        <button style={s.sideBottomLink}>❓ Help Center</button>
+        <button style={{ ...s.sideBottomLink, display: "flex", alignItems: "center", gap: 6 }}><Icon type="help" stroke="currentColor" fill="none" size={14} />Help Center</button>
         <button style={s.sideBottomLink} onClick={onSignOut}>→ Sign Out</button>
       </div>
     </aside>
@@ -407,9 +583,13 @@ function ResourcesPage({ tutorName, avatarUrl, onNavigate, onSignOut, currentSub
                 <div key={i} style={s.resourceCard}>
                   <div style={s.resourceCardTop}>
                     <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
-                      <span style={{ fontSize: 16 }}>{SOURCE_ICONS[resource.source] || "📌"}</span>
+                      {SOURCE_COLORS[resource.source] ? (
+                        <span style={{ width: 9, height: 9, borderRadius: "50%", background: SOURCE_COLORS[resource.source], flexShrink: 0 }} />
+                      ) : (
+                        <Icon type="pin" stroke="#6b7280" fill="#e5e7eb" size={14} style={{ flexShrink: 0 }} />
+                      )}
                       <span style={{ fontSize: 11, color: "#6b7280", fontFamily: FONT }}>{resource.source}</span>
-                      <span style={{ marginLeft: "auto", fontSize: 11, padding: "2px 8px", borderRadius: 999, background: typeStyle.bg, color: typeStyle.color, fontFamily: FONT }}>{resource.type}</span>
+                      <span style={{ marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 4, fontSize: 11, padding: "2px 8px", borderRadius: 999, background: typeStyle.bg, color: typeStyle.color, fontFamily: FONT }}>{typeStyle.icon && <Icon type={typeStyle.icon} stroke={typeStyle.color} fill={typeStyle.color} size={11} />}{resource.type}</span>
                     </div>
                     <h3 style={{ margin: "0 0 6px", fontSize: 15, fontWeight: 600, color: "#111827", fontFamily: FONT }}>{resource.name}</h3>
                     <p style={{ margin: 0, fontSize: 13, color: "#6b7280", lineHeight: 1.5, fontFamily: FONT }}>{resource.desc}</p>
@@ -427,24 +607,28 @@ function ResourcesPage({ tutorName, avatarUrl, onNavigate, onSignOut, currentSub
 
           {/* Cross-subject tools */}
           <div style={{ marginTop: 32 }}>
-            <h2 style={{ fontSize: 16, fontWeight: 600, color: "#111827", margin: "0 0 16px", fontFamily: FONT }}>🛠 Tools for all subjects</h2>
+            <h2 style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 16, fontWeight: 600, color: "#111827", margin: "0 0 16px", fontFamily: FONT }}><Icon type="wrench" stroke="#0369a1" fill="#7dd3fc" size={18} />Tools for all subjects</h2>
             <div style={s.resourceGrid}>
               {[
-                { name: "GeoGebra Graphing Calculator", source: "GeoGebra", desc: "Free interactive graphing tool for visualizing functions, geometry, and calculus concepts.", type: "🛠 Tool", url: "https://www.geogebra.org/graphing" },
-                { name: "Desmos Graphing Calculator", source: "Desmos", desc: "Beautiful, intuitive graphing calculator — great for showing students graphs in real time.", type: "🛠 Tool", url: "https://www.desmos.com/calculator" },
-                { name: "MyOpenMath", source: "MyOpenMath", desc: "Free online homework system with randomized practice problems for most math subjects.", type: "🎯 Practice", url: "https://www.myopenmath.com" },
-                { name: "MIT OpenCourseWare — Math", source: "MIT OCW", desc: "Full MIT math course materials — lecture notes, exams, and problem sets, all free.", type: "📖 Textbook", url: "https://ocw.mit.edu/courses/mathematics/" },
-                { name: "Wolfram Alpha", source: "Wolfram Alpha", desc: "Computational knowledge engine — great for checking answers and exploring math concepts.", type: "🛠 Tool", url: "https://www.wolframalpha.com" },
-                { name: "Paul's Math Cheat Sheets", source: "Paul's Online Math Notes", desc: "Printable cheat sheets for algebra, trig, and calculus — perfect for quick reference.", type: "🛠 Tool", url: "https://tutorial.math.lamar.edu/extras/cheatsheets_tables.aspx" },
+                { name: "GeoGebra Graphing Calculator", source: "GeoGebra", desc: "Free interactive graphing tool for visualizing functions, geometry, and calculus concepts.", type: "Tool", url: "https://www.geogebra.org/graphing" },
+                { name: "Desmos Graphing Calculator", source: "Desmos", desc: "Beautiful, intuitive graphing calculator — great for showing students graphs in real time.", type: "Tool", url: "https://www.desmos.com/calculator" },
+                { name: "MyOpenMath", source: "MyOpenMath", desc: "Free online homework system with randomized practice problems for most math subjects.", type: "Practice", url: "https://www.myopenmath.com" },
+                { name: "MIT OpenCourseWare — Math", source: "MIT OCW", desc: "Full MIT math course materials — lecture notes, exams, and problem sets, all free.", type: "Textbook", url: "https://ocw.mit.edu/courses/mathematics/" },
+                { name: "Wolfram Alpha", source: "Wolfram Alpha", desc: "Computational knowledge engine — great for checking answers and exploring math concepts.", type: "Tool", url: "https://www.wolframalpha.com" },
+                { name: "Paul's Math Cheat Sheets", source: "Paul's Online Math Notes", desc: "Printable cheat sheets for algebra, trig, and calculus — perfect for quick reference.", type: "Tool", url: "https://tutorial.math.lamar.edu/extras/cheatsheets_tables.aspx" },
               ].map((resource, i) => {
                 const typeStyle = TYPE_COLORS[resource.type] || { bg: "#f3f4f6", color: "#374151" };
                 return (
                   <div key={i} style={s.resourceCard}>
                     <div style={s.resourceCardTop}>
                       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
-                        <span style={{ fontSize: 16 }}>{SOURCE_ICONS[resource.source] || "📌"}</span>
+                        {SOURCE_COLORS[resource.source] ? (
+                          <span style={{ width: 9, height: 9, borderRadius: "50%", background: SOURCE_COLORS[resource.source], flexShrink: 0 }} />
+                        ) : (
+                          <Icon type="pin" stroke="#6b7280" fill="#e5e7eb" size={14} style={{ flexShrink: 0 }} />
+                        )}
                         <span style={{ fontSize: 11, color: "#6b7280", fontFamily: FONT }}>{resource.source}</span>
-                        <span style={{ marginLeft: "auto", fontSize: 11, padding: "2px 8px", borderRadius: 999, background: typeStyle.bg, color: typeStyle.color, fontFamily: FONT }}>{resource.type}</span>
+                        <span style={{ marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 4, fontSize: 11, padding: "2px 8px", borderRadius: 999, background: typeStyle.bg, color: typeStyle.color, fontFamily: FONT }}>{typeStyle.icon && <Icon type={typeStyle.icon} stroke={typeStyle.color} fill={typeStyle.color} size={11} />}{resource.type}</span>
                       </div>
                       <h3 style={{ margin: "0 0 6px", fontSize: 15, fontWeight: 600, color: "#111827", fontFamily: FONT }}>{resource.name}</h3>
                       <p style={{ margin: 0, fontSize: 13, color: "#6b7280", lineHeight: 1.5, fontFamily: FONT }}>{resource.desc}</p>
@@ -624,14 +808,14 @@ function ProfilePage({ user, tutorName, setTutorName, avatarUrl, setAvatarUrl, o
                 <label style={s.fieldLabel}>Current password</label>
                 <div style={{ position: "relative" }}>
                   <input style={{ ...s.authInput, paddingRight: 44 }} type={showCurrentPw ? "text" : "password"} placeholder="••••••••" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} />
-                  <button style={s.eyeBtn} onClick={() => setShowCurrentPw(!showCurrentPw)}>{showCurrentPw ? "🙈" : "👁"}</button>
+                  <button style={s.eyeBtn} onClick={() => setShowCurrentPw(!showCurrentPw)}><Icon type={showCurrentPw ? "eyeOff" : "eye"} stroke="#6b7280" fill="none" size={16} /></button>
                 </div>
               </div>
               <div style={s.fieldWrap}>
                 <label style={s.fieldLabel}>New password</label>
                 <div style={{ position: "relative" }}>
                   <input style={{ ...s.authInput, paddingRight: 44 }} type={showNewPw ? "text" : "password"} placeholder="••••••••" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
-                  <button style={s.eyeBtn} onClick={() => setShowNewPw(!showNewPw)}>{showNewPw ? "🙈" : "👁"}</button>
+                  <button style={s.eyeBtn} onClick={() => setShowNewPw(!showNewPw)}><Icon type={showNewPw ? "eyeOff" : "eye"} stroke="#6b7280" fill="none" size={16} /></button>
                 </div>
               </div>
               <div style={s.fieldWrap}><label style={s.fieldLabel}>Confirm new password</label><input style={s.authInput} type="password" placeholder="••••••••" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} /></div>
@@ -755,8 +939,8 @@ function StudentProgressPage({ user, tutorName, avatarUrl, onNavigate, onSignOut
                         <p style={{ ...s.studentCardMeta, fontFamily: FONT }}>{student.grade || "No grade"} · {student.primary_subject || "No subject"}</p>
                       </div>
                       <div style={{ display: "flex", gap: 4 }}>
-                        <button style={s.iconBtn} onClick={(e) => { e.stopPropagation(); startEdit(student); }}>✏️</button>
-                        <button style={s.iconBtn} onClick={(e) => { e.stopPropagation(); deleteStudent(student.id); }}>🗑</button>
+                        <button style={s.iconBtn} onClick={(e) => { e.stopPropagation(); startEdit(student); }}><Icon type="practice" stroke="currentColor" fill="none" size={14} /></button>
+                        <button style={s.iconBtn} onClick={(e) => { e.stopPropagation(); deleteStudent(student.id); }}><Icon type="trash" stroke="currentColor" fill="none" size={14} /></button>
                       </div>
                     </div>
                     <p style={{ ...s.studentCardSessions, fontFamily: FONT }}>{stuSessions.length} session{stuSessions.length !== 1 ? "s" : ""}</p>
@@ -769,7 +953,7 @@ function StudentProgressPage({ user, tutorName, avatarUrl, onNavigate, onSignOut
           <div style={s.studentDetail}>
             {!selectedStudent ? (
               <div style={s.emptyState}>
-                <p style={s.emptyIcon}>👤</p>
+                <Icon type="user" stroke="#9ca3af" fill="#e5e7eb" size={44} style={s.emptyIcon} />
                 <p style={{ ...s.emptyTitle, fontFamily: FONT }}>Select a student</p>
                 <p style={{ ...s.emptySub, fontFamily: FONT }}>Choose a student from the left to see their progress.</p>
               </div>
@@ -787,21 +971,21 @@ function StudentProgressPage({ user, tutorName, avatarUrl, onNavigate, onSignOut
                 {studentSessions.length === 0 ? <p style={{ color: "#9ca3af", fontSize: 14, textAlign: "center", padding: "40px 0", fontFamily: FONT }}>No sessions recorded yet.</p> : (
                   <>
                     <div style={s.chartCard}>
-                      <p style={{ ...s.chartTitle, fontFamily: FONT }}>📅 Sessions over time — duration (minutes)</p>
+                      <p style={{ ...s.chartTitle, fontFamily: FONT, display: "flex", alignItems: "center", gap: 6 }}><Icon type="calendar" stroke="#7c3aed" fill="#ddd6fe" size={16} />Sessions over time — duration (minutes)</p>
                       <ResponsiveContainer width="100%" height={200}><LineChart data={buildSessionsOverTime(studentSessions)}><CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" /><XAxis dataKey="name" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Line type="monotone" dataKey="duration" stroke={PURPLE} strokeWidth={2} dot={{ fill: PURPLE, r: 4 }} name="Duration (min)" /></LineChart></ResponsiveContainer>
                     </div>
                     <div style={s.chartCard}>
-                      <p style={{ ...s.chartTitle, fontFamily: FONT }}>📚 Topics covered</p>
+                      <p style={{ ...s.chartTitle, fontFamily: FONT, display: "flex", alignItems: "center", gap: 6 }}><Icon type="book" stroke="#7c3aed" fill="#ddd6fe" size={16} />Topics covered</p>
                       {buildTopicsCovered(studentSessions).length === 0 ? <p style={{ color: "#9ca3af", fontSize: 13, fontFamily: FONT }}>No topics recorded yet.</p> : (
                         <ResponsiveContainer width="100%" height={200}><BarChart data={buildTopicsCovered(studentSessions)} layout="vertical"><CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" /><XAxis type="number" tick={{ fontSize: 11 }} allowDecimals={false} /><YAxis type="category" dataKey="topic" tick={{ fontSize: 11 }} width={140} /><Tooltip /><Bar dataKey="sessions" fill={PURPLE} name="Sessions" radius={[0, 4, 4, 0]} /></BarChart></ResponsiveContainer>
                       )}
                     </div>
                     <div style={s.chartCard}>
-                      <p style={{ ...s.chartTitle, fontFamily: FONT }}>😊 Feelings trend</p>
-                      <ResponsiveContainer width="100%" height={220}><BarChart data={buildFeelingsData(studentSessions)}><CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" /><XAxis dataKey="name" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} allowDecimals={false} /><Tooltip /><Legend />{FEELINGS.map((f) => <Bar key={f} dataKey={f} stackId="a" fill={FEELING_COLORS[f]} name={`${FEELING_EMOJI[f]} ${f}`} />)}</BarChart></ResponsiveContainer>
+                      <p style={{ ...s.chartTitle, fontFamily: FONT, display: "flex", alignItems: "center", gap: 6 }}><Icon type="smile" stroke="#7c3aed" fill="#ddd6fe" size={16} />Feelings trend</p>
+                      <ResponsiveContainer width="100%" height={220}><BarChart data={buildFeelingsData(studentSessions)}><CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" /><XAxis dataKey="name" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} allowDecimals={false} /><Tooltip /><Legend />{FEELINGS.map((f) => <Bar key={f} dataKey={f} stackId="a" fill={FEELING_COLORS[f]} name={f} />)}</BarChart></ResponsiveContainer>
                     </div>
                     <div style={s.chartCard}>
-                      <p style={{ ...s.chartTitle, fontFamily: FONT }}>📋 Session history</p>
+                      <p style={{ ...s.chartTitle, fontFamily: FONT, display: "flex", alignItems: "center", gap: 6 }}><Icon type="clipboard" stroke="#7c3aed" fill="#ddd6fe" size={16} />Session history</p>
                       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                         {[...studentSessions].reverse().map((sess) => (
                           <div key={sess.id} style={s.sessionHistoryItem}>
@@ -809,7 +993,7 @@ function StudentProgressPage({ user, tutorName, avatarUrl, onNavigate, onSignOut
                               <p style={{ margin: "0 0 2px", fontSize: 14, fontWeight: 500, color: "#111827", fontFamily: FONT }}>{sess.topic || "No topic"}</p>
                               <p style={{ margin: 0, fontSize: 12, color: "#6b7280", fontFamily: FONT }}>{formatDate(sess.created_at)} · {formatTime(sess.duration_seconds || 0)}</p>
                             </div>
-                            {sess.feelings?.length > 0 && <div style={{ display: "flex", gap: 4 }}>{sess.feelings.map((f) => <span key={f}>{FEELING_EMOJI[f]}</span>)}</div>}
+                            {sess.feelings?.length > 0 && <div style={{ display: "flex", gap: 4 }}>{sess.feelings.map((f) => <Icon key={f} type={FEELING_ICON[f]} stroke={FEELING_COLORS[f]} fill={FEELING_COLORS[f] + "33"} size={14} />)}</div>}
                           </div>
                         ))}
                       </div>
@@ -904,9 +1088,9 @@ function DashboardScreen({ user, tutorName, avatarUrl, onNavigate, onSignOut, on
 
         <div style={{ flex: 1, overflowY: "auto", padding: 20 }}>
           <div style={s.dashStatsRow}>
-            {[["Total Sessions", totalSessions, "📋"], ["Hours Tutored", totalHours, "⏱"], ["Top Subject", topSubject, "📚"], ["Avg Duration", formatTime(avgDuration), "📊"]].map(([label, value, icon]) => (
+            {[["Total Sessions", totalSessions, "clipboard"], ["Hours Tutored", totalHours, "clock"], ["Top Subject", topSubject, "book"], ["Avg Duration", formatTime(avgDuration), "chart"]].map(([label, value, icon]) => (
               <div key={label} style={s.dashStatCard}>
-                <span style={s.dashStatIcon}>{icon}</span>
+                <Icon type={icon} stroke={PURPLE} fill={PURPLE_LIGHT} size={24} style={s.dashStatIcon} />
                 <p style={{ ...s.dashStatValue, fontFamily: FONT }}>{value}</p>
                 <p style={{ ...s.dashStatLabel, fontFamily: FONT }}>{label}</p>
               </div>
@@ -927,7 +1111,7 @@ function DashboardScreen({ user, tutorName, avatarUrl, onNavigate, onSignOut, on
           {loading ? <p style={{ color: "#9ca3af", textAlign: "center", marginTop: 40, fontFamily: FONT }}>Loading…</p> :
             filtered.length === 0 ? (
               <div style={s.emptyState}>
-                <p style={s.emptyIcon}>📋</p>
+                <Icon type="clipboard" stroke="#9ca3af" fill="#e5e7eb" size={44} style={s.emptyIcon} />
                 <p style={{ ...s.emptyTitle, fontFamily: FONT }}>No sessions yet</p>
                 <p style={{ ...s.emptySub, fontFamily: FONT }}>Start a session and it will appear here.</p>
                 <button style={{ ...s.authBtn, fontFamily: FONT }} onClick={() => onNavigate("session")}>Start your first session</button>
@@ -941,11 +1125,11 @@ function DashboardScreen({ user, tutorName, avatarUrl, onNavigate, onSignOut, on
                         <p style={{ ...s.sessionCardSubject, fontFamily: FONT }}>{session.subject || "No subject"}</p>
                         <p style={{ ...s.sessionCardTopic, fontFamily: FONT }}>{session.topic || "No topic"}</p>
                       </div>
-                      <button style={s.deleteBtn} onClick={(e) => { e.stopPropagation(); deleteSession(session.id); }}>🗑</button>
+                      <button style={s.deleteBtn} onClick={(e) => { e.stopPropagation(); deleteSession(session.id); }}><Icon type="trash" stroke="currentColor" fill="none" size={14} /></button>
                     </div>
-                    <div style={s.sessionCardMeta}><span style={{ fontFamily: FONT }}>👤 {session.student_name || "No student"}</span><span style={{ fontFamily: FONT }}>⏱ {formatTime(session.duration_seconds || 0)}</span></div>
-                    <div style={s.sessionCardMeta}><span style={{ fontFamily: FONT }}>📅 {formatDate(session.created_at)}</span><span style={{ fontFamily: FONT }}>💬 {(session.chat_messages || []).length} messages</span></div>
-                    {session.feelings?.length > 0 && <div style={s.sessionCardFeelings}>{session.feelings.map((f) => <span key={f} style={{ ...s.sessionCardFeeling, fontFamily: FONT }}>{FEELING_EMOJI[f]} {f}</span>)}</div>}
+                    <div style={s.sessionCardMeta}><span style={{ fontFamily: FONT, display: "inline-flex", alignItems: "center", gap: 4 }}><Icon type="user" stroke="#6b7280" fill="none" size={12} />{session.student_name || "No student"}</span><span style={{ fontFamily: FONT, display: "inline-flex", alignItems: "center", gap: 4 }}><Icon type="clock" stroke="#6b7280" fill="none" size={12} />{formatTime(session.duration_seconds || 0)}</span></div>
+                    <div style={s.sessionCardMeta}><span style={{ fontFamily: FONT, display: "inline-flex", alignItems: "center", gap: 4 }}><Icon type="calendar" stroke="#6b7280" fill="none" size={12} />{formatDate(session.created_at)}</span><span style={{ fontFamily: FONT, display: "inline-flex", alignItems: "center", gap: 4 }}><Icon type="chat" stroke="#6b7280" fill="none" size={12} />{(session.chat_messages || []).length} messages</span></div>
+                    {session.feelings?.length > 0 && <div style={s.sessionCardFeelings}>{session.feelings.map((f) => <span key={f} style={{ ...s.sessionCardFeeling, fontFamily: FONT, display: "inline-flex", alignItems: "center", gap: 4 }}><Icon type={FEELING_ICON[f]} stroke={FEELING_COLORS[f]} fill={FEELING_COLORS[f] + "33"} size={13} />{f}</span>)}</div>}
                     <div style={{ ...s.resumeHint, fontFamily: FONT }}>Click to view or resume →</div>
                   </div>
                 ))}
@@ -982,7 +1166,7 @@ function DesmosGraph({ expressions, title }) {
   }, [expressions]);
   return (
     <div style={s.graphWrapper}>
-      {title && <div style={s.graphTitle}>📈 {title}</div>}
+      {title && <div style={{ ...s.graphTitle, display: "flex", alignItems: "center", gap: 5 }}><Icon type="chart" stroke="#6b7280" fill="none" size={13} />{title}</div>}
       <div ref={containerRef} style={s.graphContainer} />
     </div>
   );
@@ -1017,7 +1201,7 @@ function ReportScreen({ report, duration, subject, topic, toolsUsed, messageCoun
     <div style={s.reportScreen}>
       <div style={s.reportCard}>
         <div style={s.reportHeader}>
-          <div style={s.reportIcon}>📋</div>
+          <div style={s.reportIcon}><Icon type="clipboard" stroke={PURPLE} fill={PURPLE_LIGHT} size={24} /></div>
           <div>
             <h2 style={{ ...s.reportTitle, fontFamily: FONT }}>Post-session reflection report</h2>
             <p style={{ ...s.reportMeta, fontFamily: FONT }}>{subject && topic ? `${subject} · ${topic} · ` : ""}{formatTime(duration)}</p>
@@ -1032,9 +1216,9 @@ function ReportScreen({ report, duration, subject, topic, toolsUsed, messageCoun
           {report ? <p style={{ ...s.reportText, fontFamily: FONT }}>{report}</p> : <p style={{ color: "#94a3b8", fontStyle: "italic", fontFamily: FONT }}>Generating your report…</p>}
         </div>
         <div style={s.reportActions}>
-          <button style={{ ...s.reportActionBtn, fontFamily: FONT }} onClick={onNewSession}><span style={s.reportActionIcon}>▶</span><span>New Session</span></button>
-          <button style={{ ...s.reportActionBtn, ...s.reportActionSecondary, fontFamily: FONT }} onClick={() => onNavigate("dashboard")}><span style={s.reportActionIcon}>⊞</span><span>Dashboard</span></button>
-          <button style={{ ...s.reportActionBtn, ...s.reportActionSecondary, fontFamily: FONT }} onClick={() => onNavigate("progress")}><span style={s.reportActionIcon}>📈</span><span>Student Progress</span></button>
+          <button style={{ ...s.reportActionBtn, fontFamily: FONT }} onClick={onNewSession}><Icon type="play" stroke="currentColor" fill="none" size={16} style={s.reportActionIcon} /><span>New Session</span></button>
+          <button style={{ ...s.reportActionBtn, ...s.reportActionSecondary, fontFamily: FONT }} onClick={() => onNavigate("dashboard")}><Icon type="grid" stroke="currentColor" fill="none" size={16} style={s.reportActionIcon} /><span>Dashboard</span></button>
+          <button style={{ ...s.reportActionBtn, ...s.reportActionSecondary, fontFamily: FONT }} onClick={() => onNavigate("progress")}><Icon type="chart" stroke="currentColor" fill="none" size={16} style={s.reportActionIcon} /><span>Student Progress</span></button>
         </div>
       </div>
     </div>
@@ -1124,7 +1308,7 @@ function SettingsPage({ tutorName, avatarUrl, user, onNavigate, onSignOut, sideb
               <p style={sectionTitle}>Privacy & Data</p>
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 <button style={{ ...s.uploadBtn, textAlign: "left" }} onClick={downloadData}>⬇ Download my data</button>
-                <button style={{ ...s.dangerBtn, textAlign: "left" }} onClick={deleteAllData}>🗑 Delete all my data</button>
+                <button style={{ ...s.dangerBtn, textAlign: "left", display: "flex", alignItems: "center", gap: 6 }} onClick={deleteAllData}><Icon type="trash" stroke="currentColor" fill="none" size={14} />Delete all my data</button>
                 <button style={{ ...s.authLink, textAlign: "left", padding: 0, fontSize: 14 }} onClick={() => setShowPrivacy(true)}>View Privacy Policy →</button>
               </div>
             </div>
@@ -1364,7 +1548,7 @@ export default function App() {
     const transcriptText = transcript.map((e) => e.text).join(" ");
     const sessionSummary = `Subject: ${selectedSubject || "Not specified"}\nTopic: ${selectedTopic || "Not specified"}\nStudent: ${studentName || "Not specified"}\nDuration: ${formatTime(elapsed)}\nMessages: ${messages.length}\nTools: ${toolsUsed.hints} hints, ${toolsUsed.problems} practice problems, ${toolsUsed.misconceptions} concept explanations, ${toolsUsed.nextSteps} next steps\nFeelings: ${feelings.join(", ") || "Not tracked"}\nTranscript: ${transcriptText || "None"}\n\nChat:\n${messages.map((m) => `${m.role === "user" ? "Tutor" : "Coach"}: ${m.content}`).join("\n")}`;
     try {
-      const res = await fetch("/chat", { method: "POST", headers: await getAuthHeaders(), body: JSON.stringify({ messages: [{ role: "user", content: `Generate a post-session reflection report with four labeled sections:\n1. SESSION SUMMARY\n2. STUDENT LEARNING INSIGHTS\n3. COACHING FEEDBACK\n4. TOOLS USED\nKeep each 2-4 sentences.\nData:\n${sessionSummary}` }] }) });
+      const res = await fetch(`${API_URL}/chat`, { method: "POST", headers: await getAuthHeaders(), body: JSON.stringify({ messages: [{ role: "user", content: `Generate a post-session reflection report with four labeled sections:\n1. SESSION SUMMARY\n2. STUDENT LEARNING INSIGHTS\n3. COACHING FEEDBACK\n4. TOOLS USED\nKeep each 2-4 sentences.\nData:\n${sessionSummary}` }] }) });
       const data = await res.json();
       const reflectionReport = data.reply || "Could not generate report.";
       setReport(reflectionReport);
@@ -1384,7 +1568,7 @@ export default function App() {
     if (!selectedSubject || !selectedTopic) return;
     setPlanLoading(true); setSessionPlan(null);
     try {
-      const res = await fetch("/generate-plan", { method: "POST", headers: await getAuthHeaders(), body: JSON.stringify({ subject: selectedSubject, topic: selectedTopic }) });
+      const res = await fetch(`${API_URL}/generate-plan`, { method: "POST", headers: await getAuthHeaders(), body: JSON.stringify({ subject: selectedSubject, topic: selectedTopic }) });
       const data = await res.json();
       setSessionPlan(data.plan || "Could not generate plan.");
     } catch { setSessionPlan("Could not reach the server."); }
@@ -1413,7 +1597,7 @@ export default function App() {
     setMessages(newMessages);
     if (toolType) setToolsUsed((prev) => ({ ...prev, [toolType]: prev[toolType] + 1 }));
     try {
-      const res = await fetch("/chat", { method: "POST", headers: await getAuthHeaders(), body: JSON.stringify({ messages: [{ role: "user", content: prompt }], ...getSessionContext() }) });
+      const res = await fetch(`${API_URL}/chat`, { method: "POST", headers: await getAuthHeaders(), body: JSON.stringify({ messages: [{ role: "user", content: prompt }], ...getSessionContext() }) });
       const data = await res.json();
       const reply = data.reply || "Error: " + (data.error || "something went wrong");
       if (reply.includes("VISUAL:")) setToolsUsed((prev) => ({ ...prev, graphs: prev.graphs + 1 }));
@@ -1440,7 +1624,7 @@ export default function App() {
     const newMessages = [...messages, { role: "user", content: input }];
     setMessages(newMessages); setInput(""); setLoading(true);
     try {
-      const res = await fetch("/chat", { method: "POST", headers: await getAuthHeaders(), body: JSON.stringify({ messages: newMessages, ...getSessionContext() }) });
+      const res = await fetch(`${API_URL}/chat`, { method: "POST", headers: await getAuthHeaders(), body: JSON.stringify({ messages: newMessages, ...getSessionContext() }) });
       const data = await res.json();
       const reply = data.reply || "Error: " + (data.error || "something went wrong");
       if (reply.includes("VISUAL:")) setToolsUsed((prev) => ({ ...prev, graphs: prev.graphs + 1 }));
@@ -1475,7 +1659,7 @@ export default function App() {
           <nav style={s.nav}>
             {NAV_ITEMS.map((item) => (
               <button key={item.label} style={{ ...s.navItem, ...(activeNav === item.label ? s.navItemActive : {}), fontFamily: FONT }} onClick={() => handleNavigate(item.label === "Dashboard" ? "dashboard" : item.label === "Live Sessions" ? "session" : item.label === "Student Progress" ? "progress" : item.label === "Resources" ? "resources" : item.label === "Settings" ? "settings" : "session")}>
-                <span style={s.navIcon}>{item.icon}</span><span>{item.label}</span>
+                <Icon type={item.icon} stroke="currentColor" fill="none" size={16} style={s.navIcon} /><span>{item.label}</span>
               </button>
             ))}
           </nav>
@@ -1499,20 +1683,20 @@ export default function App() {
                       </div>
                     ))}
                     {selectedSubject === subject && selectedTopic && (
-                      <button style={{ ...s.generateBtn, fontFamily: FONT }} onClick={generatePlan} disabled={planLoading}>{planLoading ? "Generating…" : "✨ Generate Plan"}</button>
+                      <button style={{ ...s.generateBtn, fontFamily: FONT, display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }} onClick={generatePlan} disabled={planLoading}>{planLoading ? "Generating…" : (<><Icon type="star" stroke="currentColor" fill="none" size={14} />Generate Plan</>)}</button>
                     )}
                   </div>
                 )}
               </div>
             ))}
           </div>
-          {sessionPlan && <div style={s.planBox}><p style={{ ...s.planTitle, fontFamily: FONT }}>📋 {selectedTopic}</p><p style={{ ...s.planText, fontFamily: FONT }}>{sessionPlan}</p></div>}
+          {sessionPlan && <div style={s.planBox}><p style={{ ...s.planTitle, fontFamily: FONT, display: "flex", alignItems: "center", gap: 5 }}><Icon type="clipboard" stroke={PURPLE_LIGHT} fill="none" size={12} />{selectedTopic}</p><p style={{ ...s.planText, fontFamily: FONT }}>{sessionPlan}</p></div>}
           <div style={s.sidebarSection}>
             <p style={{ ...s.sidebarSectionTitle, fontFamily: FONT }}>Student is feeling…</p>
             <div style={s.pillWrap}>
               {FEELINGS.map((f) => (
                 <button key={f} onClick={() => toggleFeeling(f)} style={{ ...s.feelingPill, ...(feelings.includes(f) ? s.feelingPillActive : {}), ...(isFrozen ? { opacity: 0.5, cursor: "not-allowed" } : {}), fontFamily: FONT }}>
-                  {FEELING_EMOJI[f]} {f}
+                  <Icon type={FEELING_ICON[f]} stroke={FEELING_COLORS[f]} fill={FEELING_COLORS[f] + "33"} size={14} style={{ marginRight: 4, verticalAlign: "-3px" }} />{f}
                 </button>
               ))}
             </div>
@@ -1521,7 +1705,7 @@ export default function App() {
         </div>
         <div style={s.sidebarBottom}>
           <button style={{ ...s.newSessionSideBtn, fontFamily: FONT }} onClick={() => handleNavigate("newSession")}>+ Start New Session</button>
-          <button style={{ ...s.sideBottomLink, fontFamily: FONT }}>❓ Help Center</button>
+          <button style={{ ...s.sideBottomLink, fontFamily: FONT, display: "flex", alignItems: "center", gap: 6 }}><Icon type="help" stroke="currentColor" fill="none" size={14} />Help Center</button>
           <button style={{ ...s.sideBottomLink, fontFamily: FONT }} onClick={handleSignOut}>→ Sign Out</button>
         </div>
       </aside>
@@ -1531,7 +1715,7 @@ export default function App() {
         {isFrozen && (
           <div style={s.frozenBanner}>
             <div style={s.frozenBannerLeft}>
-              <span style={s.frozenIcon}>❄️</span>
+              <Icon type="snowflake" stroke="currentColor" fill="none" size={20} style={s.frozenIcon} />
               <div>
                 <p style={{ ...s.frozenTitle, fontFamily: FONT }}>Viewing past session — {formatDate(frozenSession?.date)}</p>
                 <p style={{ ...s.frozenSub, fontFamily: FONT }}>This session is frozen. Resume to continue coaching.</p>
@@ -1539,7 +1723,7 @@ export default function App() {
             </div>
             <div style={{ display: "flex", gap: 10 }}>
               <button style={{ ...s.resumeBtn, fontFamily: FONT }} onClick={handleResume}>▶ Resume Session</button>
-              <button style={{ ...s.viewSummaryBtn, fontFamily: FONT }} onClick={() => setScreen("report")}>📋 View Summary</button>
+              <button style={{ ...s.viewSummaryBtn, fontFamily: FONT, display: "flex", alignItems: "center", gap: 6 }} onClick={() => setScreen("report")}><Icon type="clipboard" stroke="currentColor" fill="none" size={14} />View Summary</button>
               <button style={{ ...s.backBtn, fontFamily: FONT }} onClick={handleBackToDashboard}>← Back to Dashboard</button>
             </div>
           </div>
@@ -1575,11 +1759,11 @@ export default function App() {
                   <option value="__new__">+ New student</option>
                 </select>
               )}
-              <p style={{ ...s.studentTag, fontFamily: FONT }}>{isFrozen ? "📖 Read-only" : "⚡ AI Assisted Tutoring"}</p>
+              <p style={{ ...s.studentTag, fontFamily: FONT, display: "flex", alignItems: "center", gap: 5 }}>{isFrozen ? <><Icon type="book" stroke="currentColor" fill="none" size={12} />Read-only</> : <><Icon type="lightning" stroke="currentColor" fill="none" size={12} />AI Assisted Tutoring</>}</p>
             </div>
           </div>
           <div style={s.topRight}>
-            <span style={{ ...s.timer, fontFamily: FONT }}>⏱ {formatTime(elapsed)}{isFrozen ? " (paused)" : ""}</span>
+            <span style={{ ...s.timer, fontFamily: FONT, display: "inline-flex", alignItems: "center", gap: 5 }}><Icon type="clock" stroke="currentColor" fill="none" size={13} />{formatTime(elapsed)}{isFrozen ? " (paused)" : ""}</span>
             {(!isFrozen || isResumed) && <button style={{ ...s.endBtn, fontFamily: FONT }} onClick={endSession}>End Session</button>}
             <div style={s.tutorProfile}>
               <div style={s.tutorInfo}><p style={{ margin: 0, fontSize: 13, fontWeight: 600, color: "#111827", fontFamily: FONT }}>{tutorName}</p><p style={{ ...s.tutorRole, fontFamily: FONT }}>Tutor</p></div>
@@ -1597,9 +1781,9 @@ export default function App() {
             </div>
             {!isFrozen && (
               <div style={s.transcriptControls}>
-                {!speechSupported ? <p style={{ ...s.browserWarning, fontFamily: FONT }}>⚠️ Use Chrome, Edge, or Safari.</p> : (
+                {!speechSupported ? <p style={{ ...s.browserWarning, fontFamily: FONT, display: "flex", alignItems: "center", gap: 5 }}><Icon type="warning" stroke="currentColor" fill="none" size={13} />Use Chrome, Edge, or Safari.</p> : (
                   <>
-                    <button style={{ ...s.listenBtn, ...(isListening ? s.listenBtnActive : {}), fontFamily: FONT }} onClick={toggleListening}>{isListening ? "⏹ Stop" : "🎙 Start Listening"}</button>
+                    <button style={{ ...s.listenBtn, ...(isListening ? s.listenBtnActive : {}), fontFamily: FONT, display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }} onClick={toggleListening}>{isListening ? <><Icon type="stop" stroke="currentColor" fill="currentColor" size={13} />Stop</> : <><Icon type="mic" stroke="currentColor" fill="none" size={14} />Start Listening</>}</button>
                     <button style={{ ...s.clearBtn, fontFamily: FONT }} onClick={clearTranscript}>Clear</button>
                   </>
                 )}
@@ -1623,12 +1807,12 @@ export default function App() {
           <section style={{ ...s.coach, flex: 1, minWidth: 280 }}>
             <div style={s.panelHeader}>
               <h2 style={{ ...s.panelTitle, fontFamily: FONT }}>AI Coach</h2>
-              {isFrozen ? <span style={{ fontSize: 11, color: "#9ca3af", fontFamily: FONT }}>read-only</span> : <span style={s.sparkle}>✦</span>}
+              {isFrozen ? <span style={{ fontSize: 11, color: "#9ca3af", fontFamily: FONT }}>read-only</span> : <Icon type="star" stroke={PURPLE} fill={PURPLE_LIGHT} size={16} />}
             </div>
             {(selectedTopic || feelings.length > 0) && (
               <div style={s.contextBadge}>
-                {selectedTopic && <span style={{ ...s.badge, fontFamily: FONT }}>📚 {selectedTopic}</span>}
-                {feelings.map((f) => <span key={f} style={{ ...s.badge, ...s.feelingBadge, fontFamily: FONT }}>{FEELING_EMOJI[f]} {f}</span>)}
+                {selectedTopic && <span style={{ ...s.badge, fontFamily: FONT, display: "inline-flex", alignItems: "center", gap: 4 }}><Icon type="book" stroke={PURPLE} fill="none" size={12} />{selectedTopic}</span>}
+                {feelings.map((f) => <span key={f} style={{ ...s.badge, ...s.feelingBadge, fontFamily: FONT, display: "inline-flex", alignItems: "center", gap: 4 }}><Icon type={FEELING_ICON[f]} stroke={FEELING_COLORS[f]} fill={FEELING_COLORS[f] + "33"} size={13} />{f}</span>)}
               </div>
             )}
             <div style={s.chatBox}>
@@ -1646,7 +1830,7 @@ export default function App() {
                     <button style={{ ...s.cancelBtn, fontFamily: FONT }} onClick={() => setActiveButton(null)}>✕</button>
                   </div>
                 </div>
-              ) : <button style={{ ...s.actionBtn, ...s.hintBtn, fontFamily: FONT }} onClick={() => setActiveButton("hint")}><span style={s.actionBtnIcon}>💡</span><span>Hint</span></button>}
+              ) : <button style={{ ...s.actionBtn, ...s.hintBtn, fontFamily: FONT }} onClick={() => setActiveButton("hint")}><Icon type="hint" stroke="#92400e" fill="#fcd34d" /><span>Hint</span></button>}
               {activeButton === "practice" ? (
                 <div style={s.levelGroupGrid}>
                   <p style={{ ...s.levelLabelGrid, fontFamily: FONT }}>Difficulty:</p>
@@ -1655,9 +1839,9 @@ export default function App() {
                     <button style={{ ...s.cancelBtn, fontFamily: FONT }} onClick={() => setActiveButton(null)}>✕</button>
                   </div>
                 </div>
-              ) : <button style={{ ...s.actionBtn, ...s.practiceBtn, fontFamily: FONT }} onClick={() => setActiveButton("practice")}><span style={s.actionBtnIcon}>📝</span><span>Practice Problem</span></button>}
-              <button style={{ ...s.actionBtn, ...s.miscBtn, fontFamily: FONT }} onClick={handleMisconception}><span style={s.actionBtnIcon}>📖</span><span>Concept Explanation</span></button>
-              <button style={{ ...s.actionBtn, ...s.nextBtn, fontFamily: FONT }} onClick={handleNextStep}><span style={s.actionBtnIcon}>➡️</span><span>Next Step</span></button>
+              ) : <button style={{ ...s.actionBtn, ...s.practiceBtn, fontFamily: FONT }} onClick={() => setActiveButton("practice")}><Icon type="practice" stroke="#5b21b6" fill="#c4b5fd" /><span>Practice Problem</span></button>}
+              <button style={{ ...s.actionBtn, ...s.miscBtn, fontFamily: FONT }} onClick={handleMisconception}><Icon type="book" stroke="#0369a1" fill="#7dd3fc" /><span>Concept Explanation</span></button>
+              <button style={{ ...s.actionBtn, ...s.nextBtn, fontFamily: FONT }} onClick={handleNextStep}><Icon type="arrow" stroke="#15803d" fill="#86efac" /><span>Next Step</span></button>
             </div>
             <div style={{ ...s.inputRow, opacity: isFrozen ? 0.4 : 1 }}>
               <input style={{ ...s.input, fontFamily: FONT }} value={input} onChange={(e) => !isFrozen && setInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && sendMessage()} placeholder={isFrozen ? "Resume session to chat…" : selectedTopic ? `Ask about ${selectedTopic}…` : "Type a coaching question…"} disabled={isFrozen} />
@@ -1704,7 +1888,7 @@ const s = {
   nav: { padding: "12px 8px" },
   navItem: { width: "100%", display: "flex", alignItems: "center", gap: 10, padding: "9px 12px", borderRadius: 8, border: "none", background: "transparent", color: "#94a3b8", fontSize: 13, cursor: "pointer", textAlign: "left", fontFamily: FONT, marginBottom: 2 },
   navItemActive: { background: PURPLE, color: "white" },
-  navIcon: { fontSize: 14, width: 18, textAlign: "center" },
+  navIcon: { flexShrink: 0 },
   sidebarSection: { padding: "12px 12px 8px", borderTop: "1px solid #2d2a45" },
   sidebarSectionTitle: { margin: "0 0 8px", fontSize: 11, textTransform: "uppercase", letterSpacing: 0.8, color: "#64748b", fontWeight: 600, fontFamily: FONT },
   subjectPill: { width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "7px 10px", borderRadius: 6, border: "1px solid #2d2a45", background: "transparent", fontSize: 12, color: "#94a3b8", cursor: "pointer", marginBottom: 3, textAlign: "left", fontFamily: FONT },
@@ -1754,7 +1938,6 @@ const s = {
   panelHeader: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 },
   panelTitle: { margin: 0, fontSize: 15, fontWeight: 600, color: "#111827", fontFamily: FONT },
   liveBadge: { fontSize: 11, color: "#16a34a", fontWeight: 600, letterSpacing: 0.5, fontFamily: FONT },
-  sparkle: { fontSize: 16, color: PURPLE },
   transcriptBody: { flex: 1, overflowY: "auto" },
   divider: { width: 6, cursor: "col-resize", flexShrink: 0, borderLeft: "2px solid rgba(229,231,235,0.5)", margin: "0 2px", borderRadius: 4 },
   transcriptControls: { display: "flex", gap: 8, alignItems: "center", marginBottom: 10, flexShrink: 0 },
@@ -1782,7 +1965,6 @@ const s = {
   practiceBtn: { background: "rgba(237,233,254,0.8)", borderColor: "#c4b5fd", color: "#5b21b6" },
   miscBtn: { background: "rgba(224,242,254,0.8)", borderColor: "#7dd3fc", color: "#0369a1" },
   nextBtn: { background: "rgba(220,252,231,0.8)", borderColor: "#86efac", color: "#15803d" },
-  actionBtnIcon: { fontSize: 20 },
   levelGroupGrid: { gridColumn: "span 2", background: "rgba(249,250,251,0.8)", borderRadius: 10, padding: "10px 12px", border: "1px solid rgba(229,231,235,0.8)" },
   levelLabelGrid: { margin: "0 0 6px", fontSize: 12, color: "#6b7280", fontFamily: FONT },
   levelBtns: { display: "flex", gap: 6, flexWrap: "wrap" },
@@ -1807,7 +1989,6 @@ const s = {
   reportActions: { display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginTop: 8 },
   reportActionBtn: { display: "flex", flexDirection: "column", alignItems: "center", gap: 6, padding: "14px 8px", borderRadius: 10, background: PURPLE, color: "white", border: "none", fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: FONT },
   reportActionSecondary: { background: "rgba(255,255,255,0.8)", color: "#374151", border: "1px solid rgba(229,231,235,0.8)" },
-  reportActionIcon: { fontSize: 20 },
 
   graphWrapper: { marginTop: 8, borderRadius: 10, overflow: "hidden", border: "1px solid rgba(229,231,235,0.6)", background: "rgba(255,255,255,0.8)", width: "100%", maxWidth: 400 },
   graphTitle: { padding: "6px 12px", background: "rgba(249,250,251,0.8)", borderBottom: "1px solid rgba(229,231,235,0.6)", fontSize: 12, color: "#6b7280", fontFamily: FONT },
@@ -1833,7 +2014,7 @@ const s = {
   deleteBtn: { background: "none", border: "none", cursor: "pointer", fontSize: 16, color: "#9ca3af", padding: 4 },
   resumeHint: { fontSize: 11, color: "#9ca3af", marginTop: 8, textAlign: "right", fontFamily: FONT },
   emptyState: { textAlign: "center", padding: "60px 20px" },
-  emptyIcon: { fontSize: 48, margin: "0 0 16px" },
+  emptyIcon: { display: "block", margin: "0 auto 16px" },
   emptyTitle: { fontSize: 20, fontWeight: 600, color: "#111827", margin: "0 0 8px", fontFamily: FONT },
   emptySub: { fontSize: 14, color: "#6b7280", margin: "0 0 24px", fontFamily: FONT },
 

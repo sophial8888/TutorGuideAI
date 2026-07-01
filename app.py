@@ -1,11 +1,17 @@
 import os
 import re
+import certifi
 import jwt
 from flask import Flask, request, jsonify
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from groq import Groq
 from dotenv import load_dotenv
+
+# python.org's macOS build doesn't wire up the system CA store, so urllib-based
+# HTTPS calls (e.g. PyJWT fetching Supabase's JWKS) fail cert verification
+# unless pointed at a CA bundle explicitly.
+os.environ.setdefault("SSL_CERT_FILE", certifi.where())
 
 load_dotenv()
 
@@ -19,7 +25,9 @@ limiter = Limiter(
     storage_uri="memory://",
 )
 
-SUPABASE_JWT_SECRET = os.environ.get("SUPABASE_JWT_SECRET", "")
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
+SUPABASE_JWT_SECRET = os.environ.get("SUPABASE_JWT_SECRET", "")  # legacy HS256 fallback
+_jwks_client = jwt.PyJWKClient(f"{SUPABASE_URL}/auth/v1/.well-known/jwks.json") if SUPABASE_URL else None
 
 def verify_token():
     """Verify the Supabase JWT from the Authorization header. Returns user_id or None."""
@@ -28,9 +36,15 @@ def verify_token():
         return None
     token = auth_header[7:]
     try:
-        payload = jwt.decode(token, SUPABASE_JWT_SECRET, algorithms=["HS256"], audience="authenticated")
+        alg = jwt.get_unverified_header(token).get("alg", "HS256")
+        if alg == "HS256":
+            key = SUPABASE_JWT_SECRET
+        else:
+            key = _jwks_client.get_signing_key_from_jwt(token).key
+        payload = jwt.decode(token, key, algorithms=[alg], audience="authenticated")
         return payload.get("sub")
-    except Exception:
+    except Exception as e:
+        print(f"[verify_token] JWT verification failed: {type(e).__name__}: {e}")
         return None
 
 ALLOWED_FEELINGS = {"Engaged", "Confused", "Frustrated", "Disengaged", "Breakthrough"}
