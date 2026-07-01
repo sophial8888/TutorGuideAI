@@ -1,5 +1,6 @@
 import os
 import re
+import jwt
 from flask import Flask, request, jsonify
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -17,6 +18,20 @@ limiter = Limiter(
     storage_uri="memory://",
 )
 
+SUPABASE_JWT_SECRET = os.environ.get("SUPABASE_JWT_SECRET", "")
+
+def verify_token():
+    """Verify the Supabase JWT from the Authorization header. Returns user_id or None."""
+    auth_header = request.headers.get("Authorization", "")
+    if not auth_header.startswith("Bearer "):
+        return None
+    token = auth_header[7:]
+    try:
+        payload = jwt.decode(token, SUPABASE_JWT_SECRET, algorithms=["HS256"], audience="authenticated")
+        return payload.get("sub")
+    except Exception:
+        return None
+
 ALLOWED_FEELINGS = {"Engaged", "Confused", "Frustrated", "Disengaged", "Breakthrough"}
 ALLOWED_ROLES = {"user", "assistant"}
 
@@ -33,10 +48,18 @@ def sanitize(value, max_length=2000):
 def rate_limit_handler(e):
     return jsonify({"error": "Too many requests. Please slow down and try again shortly."}), 429
 
+ALLOWED_ORIGINS = {
+    "http://localhost:5173",
+    "http://localhost:5174",
+    os.environ.get("PRODUCTION_URL", ""),
+}
+
 @app.after_request
 def add_cors_headers(response):
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+    origin = request.headers.get("Origin", "")
+    if origin in ALLOWED_ORIGINS:
+        response.headers["Access-Control-Allow-Origin"] = origin
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
     response.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
     return response
 
@@ -252,6 +275,9 @@ def chat():
     if request.method == "OPTIONS":
         return jsonify({}), 200
 
+    if not verify_token():
+        return jsonify({"error": "Unauthorized."}), 401
+
     data = request.get_json(silent=True)
     if not data or not isinstance(data, dict):
         return jsonify({"error": "Invalid request body."}), 400
@@ -307,6 +333,9 @@ def chat():
 def generate_plan():
     if request.method == "OPTIONS":
         return jsonify({}), 200
+
+    if not verify_token():
+        return jsonify({"error": "Unauthorized."}), 401
 
     data = request.get_json(silent=True)
     if not data or not isinstance(data, dict):

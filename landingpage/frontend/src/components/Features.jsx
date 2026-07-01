@@ -2,30 +2,31 @@ const FEATURES = [
   {
     icon: (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+        <path d="M12 20h9"/>
+        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
       </svg>
     ),
     bg: "bg-[#5BC0EB]/10",
     iconColor: "text-[#5BC0EB]",
     accent: "border-[#5BC0EB]/20",
-    label: "Step-by-Step Explanations",
+    label: "Build Real Teaching Skills",
     description:
-      "Every answer comes with a full breakdown. Students see each step clearly, so they understand the why, not just the what.",
+      "TutorGuide AI coaches you — the tutor — in real time. Get specific feedback on how to explain concepts, ask better questions, and guide students to discover answers themselves.",
   },
   {
     icon: (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10"/>
-        <polyline points="12 6 12 12 16 14"/>
+        <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h1m5 0h1M9 15h6"/>
+        <circle cx="9" cy="9" r="0.5" fill="currentColor"/>
+        <circle cx="15" cy="9" r="0.5" fill="currentColor"/>
       </svg>
     ),
     bg: "bg-[#FF8FAB]/10",
     iconColor: "text-[#FF8FAB]",
     accent: "border-[#FF8FAB]/20",
-    label: "Available 24/7",
+    label: "Live Session Tools",
     description:
-      "Homework help doesn't stop at 9 PM. TutorGuide AI is always on, so students can practice whenever it clicks for them.",
+      "Use the live transcript to capture what's said, then tap Hint, Concept Explanation, Practice Problem, or Next Step to get instant AI coaching tailored to that exact moment in your session.",
   },
   {
     icon: (
