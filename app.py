@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
+app.config["MAX_CONTENT_LENGTH"] = 64 * 1024  # 64 KB max request body
 
 limiter = Limiter(
     key_func=get_remote_address,
@@ -44,9 +45,10 @@ def sanitize(value, max_length=2000):
     value = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]", "", value)
     return value[:max_length]
 
-@app.errorhandler(429)
-def rate_limit_handler(e):
-    return jsonify({"error": "Too many requests. Please slow down and try again shortly."}), 429
+if not os.environ.get("GROQ_API_KEY"):
+    raise RuntimeError("GROQ_API_KEY is not set. Cannot start server.")
+if not os.environ.get("SUPABASE_JWT_SECRET"):
+    raise RuntimeError("SUPABASE_JWT_SECRET is not set. Cannot start server.")
 
 ALLOWED_ORIGINS = {
     "http://localhost:5173",
@@ -54,13 +56,25 @@ ALLOWED_ORIGINS = {
     os.environ.get("PRODUCTION_URL", ""),
 }
 
+@app.errorhandler(429)
+def rate_limit_handler(e):
+    return jsonify({"error": "Too many requests. Please slow down and try again shortly."}), 429
+
+@app.errorhandler(413)
+def request_too_large(e):
+    return jsonify({"error": "Request body too large."}), 413
+
 @app.after_request
-def add_cors_headers(response):
+def apply_headers(response):
     origin = request.headers.get("Origin", "")
     if origin in ALLOWED_ORIGINS:
         response.headers["Access-Control-Allow-Origin"] = origin
     response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
     response.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=()"
     return response
 
 client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
@@ -325,7 +339,7 @@ def chat():
         error_str = str(e)
         if "429" in error_str or "rate_limit" in error_str.lower():
             return jsonify({"error": "Rate limit reached. Please wait a moment and try again."}), 429
-        return jsonify({"error": error_str}), 500
+        return jsonify({"error": "An error occurred. Please try again."}), 500
 
 
 @app.route("/generate-plan", methods=["POST", "OPTIONS"])
@@ -376,8 +390,8 @@ Format as a numbered list only. No intro or conclusion."""
         error_str = str(e)
         if "429" in error_str or "rate_limit" in error_str.lower():
             return jsonify({"error": "Rate limit reached. Please wait a moment and try again."}), 429
-        return jsonify({"error": error_str}), 500
+        return jsonify({"error": "An error occurred. Please try again."}), 500
 
 
 if __name__ == "__main__":
-    app.run(port=5000, debug=True)
+    app.run(port=5000, debug=False)

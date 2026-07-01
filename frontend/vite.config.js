@@ -8,6 +8,10 @@ export default defineConfig({
       '/chat': {
         target: 'http://127.0.0.1:5000',
         changeOrigin: true,
+      },
+      '/generate-plan': {
+        target: 'http://127.0.0.1:5000',
+        changeOrigin: true,
       }
     }
   }
