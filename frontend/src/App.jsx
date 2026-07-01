@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { supabase } from "./supabase";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, LineChart, Line, ResponsiveContainer, CartesianGrid } from "recharts";
+import tutorGuideLogo from "./assets/tutorguidelogo.png";
 
 // ============================================================
 // CONSTANTS
@@ -412,7 +413,7 @@ function Sidebar({ activeLabel, onNavigate, onSignOut, collapsed, onToggle }) {
   return (
     <aside style={{ ...s.sidebar, position: "relative", overflow: "visible", transition: "width 0.25s ease, min-width 0.25s ease" }}>
       <button onClick={onToggle} style={SIDEBAR_ARROW_BTN}>‹</button>
-      <div style={{ ...s.sidebarLogo, cursor: "pointer" }} onClick={() => { window.location.href = LANDING_URL; }} title="Go to landing page"><img src="/src/assets/tutorguidelogo.png" alt="TutorGuide AI" style={{ height: 28, width: "auto" }} /><span style={s.logoText}>TutorGuide AI</span></div>
+      <div style={{ ...s.sidebarLogo, cursor: "pointer" }} onClick={() => { window.location.href = LANDING_URL; }} title="Go to landing page"><img src={tutorGuideLogo} alt="TutorGuide AI" style={{ height: 28, width: "auto" }} /><span style={s.logoText}>TutorGuide AI</span></div>
       <div style={{ flex: 1, overflowY: "auto", overflowX: "hidden" }}>
         <nav style={s.nav}>
           {NAV_ITEMS.map((item) => (
@@ -506,7 +507,7 @@ function AuthScreen({ onAuth }) {
   return (
     <div style={s.authWrap}>
       <div style={s.authCard}>
-        <div style={s.authLogo}><img src="/src/assets/tutorguidelogo.png" alt="TutorGuide AI" style={{ height: 40, width: "auto" }} /><span style={s.authLogoText}>TutorGuide AI</span></div>
+        <div style={s.authLogo}><img src={tutorGuideLogo} alt="TutorGuide AI" style={{ height: 40, width: "auto" }} /><span style={s.authLogoText}>TutorGuide AI</span></div>
         <h2 style={s.authTitle}>{mode === "login" ? "Welcome back" : "Create your account"}</h2>
         <p style={s.authSub}>{mode === "login" ? "Sign in to access your sessions" : "Start coaching smarter with AI"}</p>
         {mode === "signup" && <div style={s.fieldWrap}><label style={s.fieldLabel}>Full name</label><input style={s.authInput} type="text" placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} /></div>}
@@ -1654,7 +1655,7 @@ export default function App() {
       ) : (
       <aside style={{ ...s.sidebar, position: "relative", overflow: "visible", transition: "width 0.25s ease, min-width 0.25s ease" }}>
         <button onClick={handleToggleSidebar} style={SIDEBAR_ARROW_BTN}>‹</button>
-        <div style={{ ...s.sidebarLogo, cursor: "pointer" }} onClick={() => { window.location.href = LANDING_URL; }} title="Go to landing page"><img src="/src/assets/tutorguidelogo.png" alt="TutorGuide AI" style={{ height: 28, width: "auto" }} /><span style={{ ...s.logoText, fontFamily: FONT }}>TutorGuide AI</span></div>
+        <div style={{ ...s.sidebarLogo, cursor: "pointer" }} onClick={() => { window.location.href = LANDING_URL; }} title="Go to landing page"><img src={tutorGuideLogo} alt="TutorGuide AI" style={{ height: 28, width: "auto" }} /><span style={{ ...s.logoText, fontFamily: FONT }}>TutorGuide AI</span></div>
         <div style={{ flex: 1, overflowY: "auto", overflowX: "hidden" }}>
           <nav style={s.nav}>
             {NAV_ITEMS.map((item) => (

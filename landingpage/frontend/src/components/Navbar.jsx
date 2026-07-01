@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import SignInModal from "./SignInModal";
+import tutorGuideLogo from "../assets/tutorguidelogo.png";
 
 const NAV_LINKS = [
   { label: "Home", href: "#home" },
@@ -29,7 +30,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <a href="#home" className="flex items-center gap-2 group">
-          <img src="/src/assets/tutorguidelogo.png" alt="TutorGuide AI" className="h-10 w-auto group-hover:scale-105 transition-transform duration-300" />
+          <img src={tutorGuideLogo} alt="TutorGuide AI" className="h-10 w-auto group-hover:scale-105 transition-transform duration-300" />
           <span className="font-heading text-xl font-semibold text-dark tracking-tight">
             TutorGuide <span className="text-[#5BC0EB]">AI</span>
           </span>

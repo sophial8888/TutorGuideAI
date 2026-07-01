@@ -1,3 +1,5 @@
+import tutorGuideLogo from "../assets/tutorguidelogo.png";
+
 const QUICK_LINKS = [
   { label: "Home", href: "#home" },
   { label: "How It Works", href: "#how-it-works" },
@@ -13,7 +15,7 @@ export default function Footer() {
         {/* Brand */}
         <div className="flex flex-col gap-4">
           <a href="#home" className="flex items-center gap-2 w-fit">
-            <img src="/src/assets/tutorguidelogo.png" alt="TutorGuide AI" className="h-9 w-auto" />
+            <img src={tutorGuideLogo} alt="TutorGuide AI" className="h-9 w-auto" />
             <span className="font-heading text-lg font-semibold text-white">
               TutorGuide <span className="text-[#5BC0EB]">AI</span>
             </span>
