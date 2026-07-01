@@ -406,6 +406,6 @@ Format as a numbered list only. No intro or conclusion."""
             return jsonify({"error": "Rate limit reached. Please wait a moment and try again."}), 429
         return jsonify({"error": "An error occurred. Please try again."}), 500
 
-
+print(f"[verify_token] JWT verification failed: {type(e).__name__}: {e}")
 if __name__ == "__main__":
     app.run(port=5000, debug=False)
