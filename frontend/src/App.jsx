@@ -690,7 +690,7 @@ function HelpCenterPage({ tutorName, avatarUrl, onNavigate, onSignOut, sidebarCo
                 <p style={{ margin: "0 0 4px", fontSize: 14, fontWeight: 600, color: "#111827", fontFamily: FONT }}>Still need help?</p>
                 <p style={{ margin: 0, fontSize: 13, color: "#6b7280", fontFamily: FONT }}>Can't find what you're looking for? Send us a message and we'll get back to you.</p>
               </div>
-              <a href="mailto:feedback@tutorguide.ai" style={{ ...s.openBtn, flexShrink: 0 }}>Contact us →</a>
+              <a href="mailto:tutorguideai@gmail.com" style={{ ...s.openBtn, flexShrink: 0 }}>Contact us →</a>
             </div>
 
             {FAQ_ITEMS.map((item, i) => {
