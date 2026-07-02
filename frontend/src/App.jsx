@@ -432,7 +432,7 @@ function Sidebar({ activeLabel, onNavigate, onSignOut, collapsed, onToggle }) {
       </div>
       <div style={s.sidebarBottom}>
         <button style={s.newSessionSideBtn} onClick={() => onNavigate("newSession")}>+ Start New Session</button>
-        <button style={{ ...s.sideBottomLink, display: "flex", alignItems: "center", gap: 6 }}><Icon type="help" stroke="currentColor" fill="none" size={14} />Help Center</button>
+        <button style={{ ...s.sideBottomLink, display: "flex", alignItems: "center", gap: 6 }} onClick={() => onNavigate("help")}><Icon type="help" stroke="currentColor" fill="none" size={14} />Help Center</button>
         <button style={s.sideBottomLink} onClick={onSignOut}>→ Sign Out</button>
       </div>
     </aside>
@@ -644,6 +644,67 @@ function ResourcesPage({ tutorName, avatarUrl, onNavigate, onSignOut, currentSub
                 );
               })}
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// HELP CENTER
+// ============================================================
+const FAQ_ITEMS = [
+  { q: "How do I start a tutoring session?", a: "Click \"+ Start New Session\" in the sidebar, pick a subject and topic, then use \"Generate Plan\" for a suggested session outline before you dive in." },
+  { q: "What's the difference between Hint levels?", a: "Clue gives a subtle Socratic nudge, Partial reveals the key insight without the full solution, and Full walks through the complete step-by-step explanation. Pick whichever fits how stuck your student is." },
+  { q: "What do the \"Student is feeling…\" tags do?", a: "Selecting a feeling (Engaged, Confused, Frustrated, Disengaged, Breakthrough) tells the AI Coach how to adapt its tone and suggestions for the rest of the session — e.g. slowing down if a student is frustrated." },
+  { q: "Where do session reports go?", a: "After you end a session, a report with a summary, learning insights, coaching feedback, and tools used is generated automatically. Past sessions and reports are available from the Dashboard." },
+  { q: "How do I find practice problems or textbooks?", a: "The Resources page has curated textbooks, practice sets, and tools organized by subject, plus general tools like Desmos and Wolfram Alpha under \"Tools for all subjects.\"" },
+  { q: "How do I change my password or profile info?", a: "Click your avatar in the top-right corner to open your profile, where you can update your name, subjects, grade levels, avatar, and password." },
+  { q: "Can I download or delete my data?", a: "Yes — go to Settings → Privacy & Data to download a copy of your data or permanently delete it." },
+  { q: "The AI Coach says \"Unauthorized\" or \"Could not reach the server.\" What do I do?", a: "Try signing out and back in — this usually means your session expired. If it persists after that, reach out using the contact link below and we'll take a look." },
+];
+
+function HelpCenterPage({ tutorName, avatarUrl, onNavigate, onSignOut, sidebarCollapsed, onToggleSidebar }) {
+  const [openIndex, setOpenIndex] = useState(0);
+
+  return (
+    <div style={s.app}>
+      <Sidebar activeLabel="Help Center" onNavigate={onNavigate} onSignOut={onSignOut} collapsed={sidebarCollapsed} onToggle={onToggleSidebar} />
+      <div style={s.mainArea}>
+        <header style={s.topbar}>
+          <div>
+            <h1 style={{ margin: 0, fontSize: 20, fontWeight: 600, color: "#111827", fontFamily: FONT }}>Help Center</h1>
+            <p style={{ margin: 0, fontSize: 13, color: "#6b7280", fontFamily: FONT }}>Answers to common questions about using TutorGuide AI</p>
+          </div>
+          <div style={s.tutorProfile}>
+            <div style={s.tutorInfo}><p style={{ margin: 0, fontSize: 13, fontWeight: 600, color: "#111827", fontFamily: FONT }}>{tutorName}</p><p style={s.tutorRole}>Tutor</p></div>
+            <Avatar avatarUrl={avatarUrl} name={tutorName} size={36} onClick={() => onNavigate("profile")} />
+          </div>
+        </header>
+
+        <div style={{ flex: 1, overflowY: "auto", padding: 24 }}>
+          <div style={{ maxWidth: 720 }}>
+            <div style={s.helpContactCard}>
+              <div>
+                <p style={{ margin: "0 0 4px", fontSize: 14, fontWeight: 600, color: "#111827", fontFamily: FONT }}>Still need help?</p>
+                <p style={{ margin: 0, fontSize: 13, color: "#6b7280", fontFamily: FONT }}>Can't find what you're looking for? Send us a message and we'll get back to you.</p>
+              </div>
+              <a href="mailto:feedback@tutorguide.ai" style={{ ...s.openBtn, flexShrink: 0 }}>Contact us →</a>
+            </div>
+
+            {FAQ_ITEMS.map((item, i) => {
+              const open = openIndex === i;
+              return (
+                <div key={item.q} style={s.faqItem}>
+                  <button style={s.faqQuestionBtn} onClick={() => setOpenIndex(open ? null : i)}>
+                    <span>{item.q}</span>
+                    <span style={{ ...s.faqChevron, transform: open ? "rotate(180deg)" : "rotate(0deg)" }}>▼</span>
+                  </button>
+                  {open && <p style={s.faqAnswer}>{item.a}</p>}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -1484,6 +1545,8 @@ export default function App() {
       setActiveNav("Resources");
     } else if (dest === "settings") {
       setActiveNav("Settings");
+    } else if (dest === "help") {
+      setActiveNav("Help Center");
     } else if (dest === "profile") {
       setShowProfile(true);
     }
@@ -1642,6 +1705,7 @@ export default function App() {
   if (activeNav === "Student Progress") return <StudentProgressPage user={user} tutorName={tutorName} avatarUrl={avatarUrl} onNavigate={handleNavigate} onSignOut={handleSignOut} sidebarCollapsed={sidebarCollapsed} onToggleSidebar={handleToggleSidebar} />;
   if (activeNav === "Resources") return <ResourcesPage tutorName={tutorName} avatarUrl={avatarUrl} onNavigate={handleNavigate} onSignOut={handleSignOut} currentSubject={selectedSubject} sidebarCollapsed={sidebarCollapsed} onToggleSidebar={handleToggleSidebar} />;
   if (activeNav === "Settings") return <SettingsPage tutorName={tutorName} avatarUrl={avatarUrl} user={user} onNavigate={handleNavigate} onSignOut={handleSignOut} sidebarCollapsed={sidebarCollapsed} onToggleSidebar={handleToggleSidebar} />;
+  if (activeNav === "Help Center") return <HelpCenterPage tutorName={tutorName} avatarUrl={avatarUrl} onNavigate={handleNavigate} onSignOut={handleSignOut} sidebarCollapsed={sidebarCollapsed} onToggleSidebar={handleToggleSidebar} />;
   if (screen === "report") return <ReportScreen report={report} duration={elapsed} subject={selectedSubject} topic={selectedTopic} toolsUsed={toolsUsed} messageCount={messages.length} onNewSession={newSession} onNavigate={handleNavigate} />;
 
   const isFrozen = screen === "frozen" && !isResumed;
@@ -1706,7 +1770,7 @@ export default function App() {
         </div>
         <div style={s.sidebarBottom}>
           <button style={{ ...s.newSessionSideBtn, fontFamily: FONT }} onClick={() => handleNavigate("newSession")}>+ Start New Session</button>
-          <button style={{ ...s.sideBottomLink, fontFamily: FONT, display: "flex", alignItems: "center", gap: 6 }}><Icon type="help" stroke="currentColor" fill="none" size={14} />Help Center</button>
+          <button style={{ ...s.sideBottomLink, fontFamily: FONT, display: "flex", alignItems: "center", gap: 6 }} onClick={() => handleNavigate("help")}><Icon type="help" stroke="currentColor" fill="none" size={14} />Help Center</button>
           <button style={{ ...s.sideBottomLink, fontFamily: FONT }} onClick={handleSignOut}>→ Sign Out</button>
         </div>
       </aside>
@@ -2062,4 +2126,11 @@ const s = {
   resourceCardActions: { display: "flex", gap: 8 },
   openBtn: { padding: "7px 14px", borderRadius: 8, background: PURPLE, color: "white", border: "none", fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: FONT, textDecoration: "none", display: "inline-block" },
   copyBtn: { padding: "7px 14px", borderRadius: 8, background: "rgba(243,244,246,0.8)", border: "1px solid rgba(209,213,219,0.8)", color: "#374151", fontSize: 13, cursor: "pointer", fontFamily: FONT, transition: "all 0.15s" },
+
+  // Help Center
+  faqItem: { background: "rgba(255,255,255,0.6)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", borderRadius: 14, border: "1px solid rgba(255,255,255,0.85)", boxShadow: "0 4px 20px rgba(124,58,237,0.07)", marginBottom: 10, overflow: "hidden" },
+  faqQuestionBtn: { width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, padding: "16px 18px", background: "none", border: "none", cursor: "pointer", textAlign: "left", fontFamily: FONT, fontSize: 14, fontWeight: 600, color: "#111827" },
+  faqAnswer: { padding: "0 18px 16px", margin: 0, fontSize: 13, color: "#6b7280", lineHeight: 1.6, fontFamily: FONT },
+  faqChevron: { flexShrink: 0, color: "#9ca3af", transition: "transform 0.15s" },
+  helpContactCard: { background: "linear-gradient(135deg, rgba(124,58,237,0.08), rgba(167,139,250,0.08))", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", borderRadius: 14, padding: 20, border: "1px solid rgba(124,58,237,0.15)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, marginBottom: 24, flexWrap: "wrap" },
 };
