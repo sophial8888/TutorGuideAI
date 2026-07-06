@@ -1,5 +1,7 @@
+import logging
 import os
 import re
+import sys
 import certifi
 import jwt
 from flask import Flask, request, jsonify
@@ -14,6 +16,13 @@ from dotenv import load_dotenv
 os.environ.setdefault("SSL_CERT_FILE", certifi.where())
 
 load_dotenv()
+
+logging.basicConfig(
+    level=os.environ.get("LOG_LEVEL", "INFO"),
+    format="%(asctime)s %(levelname)s [%(name)s] %(message)s",
+    stream=sys.stdout,
+)
+logger = logging.getLogger("tutorguide")
 
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 64 * 1024  # 64 KB max request body
@@ -44,7 +53,7 @@ def verify_token():
         payload = jwt.decode(token, key, algorithms=[alg], audience="authenticated")
         return payload.get("sub")
     except Exception as e:
-        print(f"[verify_token] JWT verification failed: {type(e).__name__}: {e}")
+        logger.warning("JWT verification failed: %s: %s", type(e).__name__, e)
         return None
 
 ALLOWED_FEELINGS = {"Engaged", "Confused", "Frustrated", "Disengaged", "Breakthrough"}
@@ -63,6 +72,11 @@ if not os.environ.get("GROQ_API_KEY"):
     raise RuntimeError("GROQ_API_KEY is not set. Cannot start server.")
 if not os.environ.get("SUPABASE_JWT_SECRET"):
     raise RuntimeError("SUPABASE_JWT_SECRET is not set. Cannot start server.")
+if not SUPABASE_URL:
+    raise RuntimeError(
+        "SUPABASE_URL is not set. Cannot start server. "
+        "(Required for JWKS-based verification of ES256 Supabase tokens.)"
+    )
 
 ALLOWED_ORIGINS = {
     "http://localhost:5173",
@@ -276,7 +290,13 @@ def build_system_prompt(subject, topic, session_plan, feelings):
             system += f"\nCurrent topic: {topic}"
         if session_plan:
             system += f"\nSession plan:\n{session_plan}"
-        system += "\nUse this context to make your coaching specific to what the tutor is currently teaching."
+        system += (
+            "\nThis subject/topic is the session's planned starting point, not a restriction."
+            " Tutoring sessions often drift to other questions or concepts the student raises."
+            " Always check the LIVE TRANSCRIPT below for what is actually being discussed right now,"
+            " and coach the tutor on that — even if it falls under a different topic, unit, or subject"
+            " than the one selected above."
+        )
 
     if feelings:
         feeling_str = ", ".join(feelings)

@@ -27,3 +27,6 @@ dist-ssr
 .env        ← make sure this line is here
 .env.local
 .env.*.local
+
+# stray manual backups
+*.backup

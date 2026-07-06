@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { supabase } from "./supabase";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, LineChart, Line, ResponsiveContainer, CartesianGrid } from "recharts";
 import tutorGuideLogo from "./assets/tutorguidelogo.png";
@@ -731,9 +731,7 @@ function ProfilePage({ user, tutorName, setTutorName, avatarUrl, setAvatarUrl, o
   const [avatarUploading, setAvatarUploading] = useState(false);
   const fileInputRef = useRef(null);
 
-  useEffect(() => { fetchProfile(); }, []);
-
-  const fetchProfile = async () => {
+  const fetchProfile = useCallback(async () => {
     setLoading(true);
     const { data } = await supabase.from("profiles").select("*").eq("id", user.id).single();
     if (data) {
@@ -741,7 +739,9 @@ function ProfilePage({ user, tutorName, setTutorName, avatarUrl, setAvatarUrl, o
       if (data.avatar_url) setAvatarUrl(data.avatar_url);
     }
     setLoading(false);
-  };
+  }, [user, tutorName]);
+
+  useEffect(() => { fetchProfile(); }, [fetchProfile]);
 
   const saveProfile = async () => {
     setSaving(true); setSaveMsg("");
@@ -916,9 +916,7 @@ function StudentProgressPage({ user, tutorName, avatarUrl, onNavigate, onSignOut
   const [formError, setFormError] = useState("");
   const [formLoading, setFormLoading] = useState(false);
 
-  useEffect(() => { fetchData(); }, []);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
     const [{ data: studentsData }, { data: sessionsData }] = await Promise.all([
       supabase.from("students").select("*").eq("tutor_id", user.id).order("name"),
@@ -927,7 +925,9 @@ function StudentProgressPage({ user, tutorName, avatarUrl, onNavigate, onSignOut
     setStudents(studentsData || []);
     setSessions(sessionsData || []);
     setLoading(false);
-  };
+  }, [user]);
+
+  useEffect(() => { fetchData(); }, [fetchData]);
 
   const saveStudent = async () => {
     if (!newName.trim()) return setFormError("Name is required.");
@@ -1101,14 +1101,14 @@ function DashboardScreen({ user, tutorName, avatarUrl, onNavigate, onSignOut, on
   const [filterDateFrom, setFilterDateFrom] = useState("");
   const [filterDateTo, setFilterDateTo] = useState("");
 
-  useEffect(() => { fetchSessions(); }, []);
-
-  const fetchSessions = async () => {
+  const fetchSessions = useCallback(async () => {
     setLoading(true);
     const { data } = await supabase.from("sessions").select("*").eq("tutor_id", user.id).order("created_at", { ascending: false });
     setSessions(data || []);
     setLoading(false);
-  };
+  }, [user]);
+
+  useEffect(() => { fetchSessions(); }, [fetchSessions]);
 
   const deleteSession = async (id) => {
     if (!confirm("Delete this session?")) return;
@@ -1449,7 +1449,7 @@ export default function App() {
   const [transcript, setTranscript] = useState([]);
   const [interimText, setInterimText] = useState("");
   const [isListening, setIsListening] = useState(false);
-  const [speechSupported, setSpeechSupported] = useState(true);
+  const [speechSupported] = useState(() => !!(window.SpeechRecognition || window.webkitSpeechRecognition));
   const recognitionRef = useRef(null);
   const transcriptEndRef = useRef(null);
   const [transcriptWidth, setTranscriptWidth] = useState(300);
@@ -1486,8 +1486,8 @@ export default function App() {
     return () => subscription.unsubscribe();
   }, []);
 
-  useEffect(() => { if (user) fetchStudents(); }, [user]);
-  const fetchStudents = async () => { const { data } = await supabase.from("students").select("*").eq("tutor_id", user.id).order("name"); setStudents(data || []); };
+  const fetchStudents = useCallback(async () => { const { data } = await supabase.from("students").select("*").eq("tutor_id", user.id).order("name"); setStudents(data || []); }, [user]);
+  useEffect(() => { if (user) fetchStudents(); }, [user, fetchStudents]);
 
   useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
   useEffect(() => { transcriptEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [transcript, interimText]);
@@ -1499,7 +1499,7 @@ export default function App() {
 
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) { setSpeechSupported(false); return; }
+    if (!SpeechRecognition) return;
     const recognition = new SpeechRecognition();
     recognition.continuous = true; recognition.interimResults = true; recognition.lang = "en-US";
     recognition.onresult = (event) => {
@@ -1516,7 +1516,7 @@ export default function App() {
       setInterimText(interim);
     };
     recognition.onerror = (event) => { if (event.error === "not-allowed") alert("Microphone access was denied."); setIsListening(false); };
-    recognition.onend = () => { if (recognitionRef.current?._shouldRestart) { try { recognition.start(); } catch {} } };
+    recognition.onend = () => { if (recognitionRef.current?._shouldRestart) { try { recognition.start(); } catch { /* already running; ignore */ } } };
     recognitionRef.current = recognition;
     return () => { recognition.stop(); };
   }, []);
@@ -1795,7 +1795,7 @@ export default function App() {
         )}
 
         <header style={s.topbar}>
-          <div style={s.studentCard}>
+          <div style={s.topbarStudent}>
             <div style={s.studentAvatar}>{studentName ? studentName.charAt(0).toUpperCase() : "?"}</div>
             <div>
               {isFrozen ? (
@@ -1987,7 +1987,7 @@ const s = {
   backBtn: { padding: "8px 16px", borderRadius: 8, background: "rgba(255,255,255,0.8)", color: "#374151", border: "1px solid rgba(209,213,219,0.8)", fontSize: 13, cursor: "pointer", fontFamily: FONT },
 
   topbar: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 20px", background: "rgba(255,255,255,0.7)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", borderBottom: "1px solid rgba(229,231,235,0.6)", flexShrink: 0 },
-  studentCard: { display: "flex", alignItems: "center", gap: 12 },
+  topbarStudent: { display: "flex", alignItems: "center", gap: 12 },
   studentAvatar: { width: 40, height: 40, borderRadius: "50%", background: `${PURPLE}22`, color: PURPLE, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, fontWeight: 600, flexShrink: 0, fontFamily: FONT },
   studentTag: { margin: 0, fontSize: 12, color: PURPLE, fontWeight: 500, fontFamily: FONT },
   topRight: { display: "flex", alignItems: "center", gap: 16 },
