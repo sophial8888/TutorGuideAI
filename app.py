@@ -106,7 +106,7 @@ def apply_headers(response):
     return response
 
 client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
-MODEL = "llama-3.3-70b-versatile"
+MODEL = "openai/gpt-oss-120b"
 
 SYSTEM_PROMPT = """You are TutorGuide AI, a real-time instructional coaching assistant for peer math tutors during live tutoring sessions.
 
