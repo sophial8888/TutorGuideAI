@@ -1661,7 +1661,7 @@ export default function App() {
     setMessages(newMessages);
     if (toolType) setToolsUsed((prev) => ({ ...prev, [toolType]: prev[toolType] + 1 }));
     try {
-      const res = await fetch(`${API_URL}/chat`, { method: "POST", headers: await getAuthHeaders(), body: JSON.stringify({ messages: [...messages, { role: "user", content: prompt }], ...getSessionContext() }) });
+      const res = await fetch(`${API_URL}/chat`, { method: "POST", headers: await getAuthHeaders(), body: JSON.stringify({ messages: [...messages.slice(-6), { role: "user", content: prompt }], ...getSessionContext() }) });
       const data = await res.json();
       const reply = data.reply || "Error: " + (data.error || "something went wrong");
       if (reply.includes("VISUAL:")) setToolsUsed((prev) => ({ ...prev, graphs: prev.graphs + 1 }));

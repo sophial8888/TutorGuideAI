@@ -88,6 +88,12 @@ def window_transcript(text):
         + text[-TRANSCRIPT_TAIL_CHARS:]
     )
 
+
+def latest_transcript_lines(text, max_lines=10, max_chars=1200):
+    """The last few transcript lines, i.e. what is being said right now."""
+    lines = [line for line in text.splitlines() if line.strip()]
+    return "\n".join(lines[-max_lines:])[-max_chars:]
+
 if not os.environ.get("GROQ_API_KEY"):
     raise RuntimeError("GROQ_API_KEY is not set. Cannot start server.")
 if not os.environ.get("SUPABASE_JWT_SECRET"):
@@ -210,6 +216,7 @@ MODES
 Goal: A nudge aimed at the exact step the student is stuck on.
 
 Output structure:
+- Working on: the current problem (one line, always first)
 - Where the student is stuck (one line, using the real problem)
 - Exact question for the tutor to ask
 - Backup question if the student is still stuck
@@ -224,6 +231,7 @@ Rules:
 Goal: Help the tutor explain the concept behind THIS problem clearly.
 
 Output structure:
+- Working on: the current problem (one line, always first)
 - The core idea in one or two plain sentences, shown with this problem's numbers
 - One concrete way to show it (a picture, an analogy, or a simpler version of the same problem)
 - Exact wording the tutor can use
@@ -236,6 +244,7 @@ Output structure:
 Goal: A practice problem on the same skill, plus everything the tutor needs to check the student's work.
 
 Output structure:
+- Working on: the current problem (one line, always first)
 - Problem: one practice problem with the same structure as the problem the student is working on, with the numbers changed (adjust difficulty as requested)
 - Answer: the final answer
 - Worked solution: 2-5 short steps, for the tutor
@@ -259,6 +268,7 @@ Pick the best move based on how the student is doing in the transcript and chat.
 - Slow down or take a break (the student is frustrated or tired)
 
 Output structure:
+- Working on: the current problem (one line, always first)
 - Best move: the move, in one line
 - Why: one short reason based on what the student just said or did
 - Example: exactly what the tutor says or does, using this problem (e.g. Say: "Plug 1.5 back into 2x * 8 = 24. Does it work?")
@@ -268,6 +278,8 @@ Output structure:
 5. CHAT MODE
 ------------------------
 Goal: Answer the tutor's question, using the session context.
+
+- Always start with the "Working on:" line.
 
 - Concept explanations, strategy advice, and clarification are all allowed.
 - Full solutions only if the tutor asks for them.
@@ -370,7 +382,8 @@ def chat():
     subject      = sanitize(data.get("subject", ""), max_length=100)
     topic        = sanitize(data.get("topic", ""), max_length=100)
     session_plan = sanitize(data.get("sessionPlan", ""), max_length=2000)
-    transcript   = window_transcript(sanitize(data.get("transcript", ""), max_length=200_000))
+    full_transcript = sanitize(data.get("transcript", ""), max_length=200_000)
+    transcript   = window_transcript(full_transcript)
 
     raw_feelings = data.get("feelings", [])
     feelings = [f for f in raw_feelings if isinstance(f, str) and f in ALLOWED_FEELINGS] \
@@ -390,6 +403,15 @@ def chat():
 
     if transcript:
         system += f"\n\n--- LIVE TRANSCRIPT ---\n{transcript}"
+
+    # The model pays most attention to the latest message, so put the newest
+    # transcript lines right next to the tutor's request.
+    if full_transcript and messages and messages[-1]["role"] == "user":
+        messages[-1]["content"] += (
+            "\n\n--- RIGHT NOW (newest transcript lines, newest last) ---\n"
+            + latest_transcript_lines(full_transcript)
+            + "\n\nStart with \"Working on:\" naming the MOST RECENT problem from these lines or the chat."
+        )
 
     groq_messages = [{"role": "system", "content": system}] + messages
 

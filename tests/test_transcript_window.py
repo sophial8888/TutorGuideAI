@@ -1,5 +1,5 @@
 import app as app_module
-from app import TRANSCRIPT_HEAD_CHARS, TRANSCRIPT_TAIL_CHARS, window_transcript
+from app import TRANSCRIPT_HEAD_CHARS, TRANSCRIPT_TAIL_CHARS, latest_transcript_lines, window_transcript
 from tests.test_chat_route import auth_header
 
 
@@ -35,3 +35,35 @@ def test_chat_sends_latest_transcript_to_model(client, monkeypatch):
     system = captured["messages"][0]["content"]
     assert "today we solve x plus two equals eight" in system
     assert "do I subtract from both sides" in system
+
+
+def test_latest_lines_keeps_only_newest():
+    text = "\n".join(f"[13:5{i % 10}] line {i}" for i in range(30))
+    result = latest_transcript_lines(text)
+    assert "line 29" in result
+    assert "line 20" in result
+    assert "line 19" not in result
+
+
+def test_newest_lines_are_attached_to_the_request(client, monkeypatch):
+    captured = {}
+
+    def fake_create(*args, **kwargs):
+        captured["messages"] = kwargs["messages"]
+        msg = type("Msg", (), {"content": "ok"})()
+        return type("R", (), {"choices": [type("C", (), {"message": msg})()]})()
+
+    monkeypatch.setattr(app_module.client.chat.completions, "create", fake_create)
+    transcript = "[13:57] two x minus nine equals twelve\n[13:58] let's move on to the next one\n[13:58] x plus two equals five"
+    resp = client.post(
+        "/chat",
+        json={"messages": [{"role": "user", "content": "[Hint]"}], "transcript": transcript},
+        headers=auth_header(),
+    )
+
+    assert resp.status_code == 200
+    last = captured["messages"][-1]["content"]
+    assert last.startswith("[Hint]")
+    assert "RIGHT NOW" in last
+    assert last.index("x plus two equals five") > last.index("two x minus nine")
+    assert "Working on:" in last
