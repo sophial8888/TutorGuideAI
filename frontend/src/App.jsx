@@ -1183,6 +1183,7 @@ function DashboardScreen({ user, tutorName, avatarUrl, onNavigate, onSignOut, on
             <input style={{ ...s.filterInput, fontFamily: FONT }} type="date" value={filterDateTo} onChange={(e) => setFilterDateTo(e.target.value)} />
             {(filterSubject || filterStudent || filterDateFrom || filterDateTo) && <button style={{ ...s.clearFilterBtn, fontFamily: FONT }} onClick={() => { setFilterSubject(""); setFilterStudent(""); setFilterDateFrom(""); setFilterDateTo(""); }}>Clear</button>}
           </div>
+          <p style={{ margin: "0 0 12px", fontSize: 12, color: "#6b7280", fontFamily: FONT }}>For privacy, transcripts and chat messages are automatically deleted 30 days after a session. Session details and reflection reports are kept.</p>
 
           {loading ? <p style={{ color: "#9ca3af", textAlign: "center", marginTop: 40, fontFamily: FONT }}>Loading…</p> :
             filtered.length === 0 ? (
