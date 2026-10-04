@@ -12,10 +12,11 @@ def test_long_transcript_keeps_start_and_latest():
     middle = "M" * 10_000
     latest = "L" * TRANSCRIPT_TAIL_CHARS
     result = window_transcript(start + middle + latest)
-    assert result.startswith(start)
     assert result.endswith(latest)
-    assert "M" not in result
+    assert start in result
+    assert "M" not in result.replace("EARLIER", "").replace("LATEST", "")
     assert "middle of session skipped" in result
+    assert result.index("EARLIER") < result.index(start) < result.index("LATEST") < result.index(latest)
 
 
 def test_chat_sends_latest_transcript_to_model(client, monkeypatch):

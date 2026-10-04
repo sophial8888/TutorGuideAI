@@ -1639,7 +1639,7 @@ export default function App() {
     finally { setPlanLoading(false); }
   };
 
-  const getSessionContext = () => ({ subject: selectedSubject || "", topic: selectedTopic || "", sessionPlan: sessionPlan || "", feelings, transcript: transcript.map((e) => e.text).join(" ") });
+  const getSessionContext = () => ({ subject: selectedSubject || "", topic: selectedTopic || "", sessionPlan: sessionPlan || "", feelings, transcript: transcript.map((e) => (e.time ? `[${e.time}] ` : "") + e.text).join("\n") });
 
   const getAuthHeaders = async () => {
     const { data: { session } } = await supabase.auth.getSession();
