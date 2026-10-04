@@ -1681,7 +1681,7 @@ export default function App() {
   };
 
   const handleMisconception = () => callAI(`[Concept explanation]\nProvide a clear, tutor-friendly explanation of this concept: (1) what it is in plain terms, (2) a simple analogy or visual to make it click, (3) common sticking points to watch for, (4) a follow-up question to check understanding.`, `💡 Concept explanation`, "misconceptions");
-  const handleNextStep = () => callAI(`[Next step]\nGive 2-3 concrete ranked options. Be brief.`, `➡️ Next Step`, "nextSteps");
+  const handleNextStep = () => callAI(`[Next step]\nWhat teaching move should the tutor make next in this session? Give the best move and a backup move, each with a short reason and an example of exactly what to say or do. No math hints.`, `➡️ Next Step`, "nextSteps");
 
   const sendMessage = async () => {
     if (!input.trim() || loading || (screen === "frozen" && !isResumed)) return;
