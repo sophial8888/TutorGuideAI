@@ -375,6 +375,19 @@ Questions or concerns? Contact us at tutorguideai@gmail.com.
 
 By creating an account, you agree to these terms.`;
 
+// For privacy, students are saved by first name or initials only (no last names).
+function studentNameError(name) {
+  const trimmed = name.trim();
+  if (!trimmed) return "Name is required.";
+  const words = trimmed.split(/\s+/);
+  const isInitial = (w) => /^[A-Za-z]\.?$/.test(w);
+  const allInitials = words.every(isInitial);
+  const firstNameLastInitial = words.length === 2 && isInitial(words[1]);
+  if (words.length > 1 && !allInitials && !firstNameLastInitial) return "For privacy, please use just a first name, first name + last initial, or initials (e.g. Maya, Maya J, or M.J.), no full last name.";
+  if (trimmed.length > 20) return "Please keep it short: a first name or initials.";
+  return "";
+}
+
 function formatTime(seconds) {
   const m = Math.floor(seconds / 60).toString().padStart(2, "0");
   const s = (seconds % 60).toString().padStart(2, "0");
@@ -930,7 +943,8 @@ function StudentProgressPage({ user, tutorName, avatarUrl, onNavigate, onSignOut
   useEffect(() => { fetchData(); }, [fetchData]);
 
   const saveStudent = async () => {
-    if (!newName.trim()) return setFormError("Name is required.");
+    const nameError = studentNameError(newName);
+    if (nameError) return setFormError(nameError);
     setFormLoading(true); setFormError("");
     if (editingStudent) {
       const { error } = await supabase.from("students").update({ name: newName, grade: newGrade, primary_subject: newSubject, notes: newNotes }).eq("id", editingStudent.id).eq("tutor_id", user.id);
@@ -1076,7 +1090,7 @@ function StudentProgressPage({ user, tutorName, avatarUrl, onNavigate, onSignOut
               <button style={s.modalClose} onClick={() => { setShowAddStudent(false); resetForm(); }}>✕</button>
             </div>
             <div style={s.modalBody}>
-              <div style={s.fieldWrap}><label style={s.fieldLabel}>Name *</label><input style={s.authInput} placeholder="Student name" value={newName} onChange={(e) => setNewName(e.target.value)} /></div>
+              <div style={s.fieldWrap}><label style={s.fieldLabel}>First name or initials *</label><input style={s.authInput} placeholder="e.g. Maya, Maya J, or M.J." value={newName} onChange={(e) => setNewName(e.target.value)} /></div>
               <div style={s.fieldWrap}><label style={s.fieldLabel}>Grade level</label><select style={s.authInput} value={newGrade} onChange={(e) => setNewGrade(e.target.value)}><option value="">Select grade…</option>{GRADES.map((g) => <option key={g} value={g}>{g}</option>)}</select></div>
               <div style={s.fieldWrap}><label style={s.fieldLabel}>Primary subject</label><select style={s.authInput} value={newSubject} onChange={(e) => setNewSubject(e.target.value)}><option value="">Select subject…</option>{SUBJECTS.map((sub) => <option key={sub} value={sub}>{sub}</option>)}</select></div>
               <div style={s.fieldWrap}><label style={s.fieldLabel}>Notes</label><textarea style={{ ...s.authInput, height: 100, resize: "vertical" }} placeholder="e.g. Struggles with fractions…" value={newNotes} onChange={(e) => setNewNotes(e.target.value)} /></div>
@@ -1430,6 +1444,7 @@ export default function App() {
   const [studentName, setStudentName] = useState("");
   const [showNewStudentQuick, setShowNewStudentQuick] = useState(false);
   const [quickStudentName, setQuickStudentName] = useState("");
+  const [quickStudentError, setQuickStudentError] = useState("");
   const [quickStudentGrade, setQuickStudentGrade] = useState("");
 
   const [openSubject, setOpenSubject] = useState(null);
@@ -1588,7 +1603,9 @@ export default function App() {
   const clearTranscript = () => { setTranscript([]); setInterimText(""); };
 
   const quickAddStudent = async () => {
-    if (!quickStudentName.trim()) return;
+    const nameError = studentNameError(quickStudentName);
+    setQuickStudentError(nameError);
+    if (nameError) return;
     const { data, error } = await supabase.from("students").insert({ tutor_id: user.id, name: quickStudentName, grade: quickStudentGrade }).select().single();
     if (!error && data) { await fetchStudents(); setSelectedStudentId(data.id); setStudentName(data.name); setShowNewStudentQuick(false); setQuickStudentName(""); setQuickStudentGrade(""); }
   };
@@ -1802,13 +1819,14 @@ export default function App() {
                 <p style={{ margin: 0, fontSize: 16, fontWeight: 600, color: "#111827", fontFamily: FONT }}>{studentName || "No student"}</p>
               ) : showNewStudentQuick ? (
                 <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                  <input style={{ ...s.authInput, padding: "4px 8px", fontSize: 13, width: 160, fontFamily: FONT }} placeholder="Student name *" value={quickStudentName} onChange={(e) => setQuickStudentName(e.target.value)} />
+                  <input style={{ ...s.authInput, padding: "4px 8px", fontSize: 13, width: 160, fontFamily: FONT }} placeholder="First name or initials *" value={quickStudentName} onChange={(e) => { setQuickStudentName(e.target.value); setQuickStudentError(""); }} />
+                  {quickStudentError && <p style={{ margin: 0, fontSize: 11, color: "#dc2626", maxWidth: 160, fontFamily: FONT }}>{quickStudentError}</p>}
                   <div style={{ display: "flex", gap: 4 }}>
                     <select style={{ ...s.authInput, padding: "4px 8px", fontSize: 12, flex: 1, fontFamily: FONT }} value={quickStudentGrade} onChange={(e) => setQuickStudentGrade(e.target.value)}>
                       <option value="">Grade…</option>{GRADES.map((g) => <option key={g} value={g}>{g}</option>)}
                     </select>
                     <button style={{ ...s.levelBtn, fontSize: 11, padding: "4px 8px", fontFamily: FONT }} onClick={quickAddStudent}>Add</button>
-                    <button style={{ ...s.cancelBtn, fontSize: 11, fontFamily: FONT }} onClick={() => setShowNewStudentQuick(false)}>✕</button>
+                    <button style={{ ...s.cancelBtn, fontSize: 11, fontFamily: FONT }} onClick={() => { setShowNewStudentQuick(false); setQuickStudentError(""); }}>✕</button>
                   </div>
                 </div>
               ) : (
